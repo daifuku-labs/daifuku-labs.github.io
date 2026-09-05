@@ -1,4 +1,4 @@
-# daifuku-labs.github.io
+# daifuku-labs.github.io（公開 URL は https://daifuku-labs.com/・2026-09-06 に独自ドメイン化）
 
 Daifuku Labs の公開サイト（GitHub Pages）。アプリのサポートページ・プライバシーポリシー・app-ads.txt を置く。
 
@@ -17,7 +17,7 @@ Daifuku Labs の公開サイト（GitHub Pages）。アプリのサポートペ�
 
 ## ファイル説明
 
-- **index.html** — サイトの入口。アプリごとのページへのリンクと連絡先（daifuku.labs@gmail.com）
+- **index.html** — サイトの入口。アプリごとのページへのリンクと連絡先（support@daifuku-labs.com・Cloudflare Email Routing で Gmail へ転送）
 - **melody-eraser/** — アプリ「メロディ消しゴム」の公開ページ一式。App Store Connect の
   プライバシーポリシーURL・サポートURLはここを指す
 - **app-ads.txt** — 広告枠の正規販売者を宣言する IAB 標準ファイル。AdMob が参照する
