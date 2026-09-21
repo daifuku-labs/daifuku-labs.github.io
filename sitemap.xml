@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://daifuku-labs.com/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://daifuku-labs.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daifuku-labs.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daifuku-labs.com/en/"/>
+  </url>
+  <url>
+    <loc>https://daifuku-labs.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://daifuku-labs.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daifuku-labs.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daifuku-labs.com/en/"/>
+  </url>
+  <url>
+    <loc>https://daifuku-labs.com/melody-eraser/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://daifuku-labs.com/melody-eraser/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daifuku-labs.com/melody-eraser/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daifuku-labs.com/melody-eraser/en/"/>
+  </url>
+  <url>
+    <loc>https://daifuku-labs.com/melody-eraser/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://daifuku-labs.com/melody-eraser/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daifuku-labs.com/melody-eraser/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daifuku-labs.com/melody-eraser/en/"/>
+  </url>
+  <url>
+    <loc>https://daifuku-labs.com/melody-eraser/support.html</loc>
+  </url>
+  <url>
+    <loc>https://daifuku-labs.com/melody-eraser/privacy-policy.html</loc>
+  </url>
+  <url>
+    <loc>https://daifuku-labs.com/kanade/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://daifuku-labs.com/kanade/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daifuku-labs.com/kanade/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daifuku-labs.com/kanade/en/"/>
+  </url>
+  <url>
+    <loc>https://daifuku-labs.com/kanade/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://daifuku-labs.com/kanade/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://daifuku-labs.com/kanade/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://daifuku-labs.com/kanade/en/"/>
+  </url>
+  <url>
+    <loc>https://daifuku-labs.com/kanade/support.html</loc>
+  </url>
+  <url>
+    <loc>https://daifuku-labs.com/kanade/privacy-policy.html</loc>
+  </url>
+</urlset>

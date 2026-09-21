@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://daifuku-labs.com/sitemap.xml

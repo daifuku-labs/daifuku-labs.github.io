@@ -1,0 +1,231 @@
+/* daifuku-labs.com — 製品紹介ページの共通スタイル
+ *
+ * マークアップは 2 つのトーンで共通。見た目は <body> のクラス 1 つで切り替える。
+ *   .tone-y … 採用案（製品ごとに世界観。トップ＝紙色／メロディ消しゴム＝暖色／Kanade＝ダーク。
+ *              画像とテキストの左右交互。スマホ幅では画面下に固定の App Store バッジ）
+ *   .tone-x … 予備案（全ページ白基調で統一。中央揃えの縦積み。固定バッジなし）
+ * 製品ごとの色は .p-top / .p-melody-eraser / .p-kanade が担う。
+ * JavaScript は使わない。固定バッジは position: sticky だけで実現している。
+ */
+
+/* ───────────────────────────────── 土台 */
+:root { color-scheme: light; }
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font: 15px/1.7 -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+img, video { display: block; width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+h1, h2 { letter-spacing: -.02em; line-height: 1.28; margin: 0; font-weight: 700; }
+p { margin: .6em 0 0; }
+
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 10px; z-index: 10; background: var(--fg); color: var(--bg);
+              padding: 8px 14px; border-radius: 6px; }
+
+/* ───────────────────────────────── トーン（色） */
+.tone-x { --bg: #fff; --fg: #1d1d1f; --sub: #6e6e73; --acc: #b3432b;
+          --card: #f5f5f7; --line: #e3e0dc; --shadow: 0 6px 26px rgba(0,0,0,.14);
+          --sticky-bg: rgba(255,255,255,.93); }
+.tone-y { --bg: #faf7f2; --fg: #231f1c; --sub: #6f6760; --acc: #b3432b;
+          --card: #fff; --line: #e7e1d8; --shadow: 0 6px 26px rgba(0,0,0,.14);
+          --sticky-bg: rgba(255,255,255,.93); }
+.tone-y.p-melody-eraser { --bg: #faf6f0; }
+.tone-y.p-kanade { --bg: #0c0e13; --card: #151922; --fg: #e9ecf3; --sub: #98a1b0;
+                   --line: #232936; --acc: #ff7a55; --shadow: 0 10px 40px rgba(0,0,0,.6);
+                   --sticky-bg: rgba(12,14,19,.93); color-scheme: dark; }
+
+/* ───────────────────────────────── 共通の部品 */
+.nav { display: flex; justify-content: space-between; align-items: center;
+       padding: 14px 20px; border-bottom: 1px solid var(--line); }
+.brand { font-weight: 600; font-size: .95em; letter-spacing: .02em; }
+.navlinks a { font-size: .86em; color: var(--sub); text-decoration: underline;
+              text-underline-offset: 3px; }
+.eyebrow { font-size: .82em; color: var(--sub); margin: 0 0 .9em; letter-spacing: .04em; }
+.sub { color: var(--sub); font-size: 1.02em; margin-top: .9em; }
+.plat { font-size: .8em; color: var(--sub); margin: 0; letter-spacing: .04em; }
+
+/* App Store バッジ。メロディ消しゴムは Apple 公式バッジ SVG、
+   Kanade は審査中なのでリンクにしていない（.soon が外れると入手表記に変わる）。 */
+.cta { margin-top: 1.7em; }
+.badge-wrap { display: inline-block; }
+.badge { display: inline-flex; align-items: center; gap: 9px; }
+.badge img { width: 150px; height: 50px; }
+.badge-mac { background: #000; color: #fff; border: 1px solid #000; border-radius: 9px;
+             padding: 9px 17px 9px 14px; }
+.tone-y.p-kanade .badge-mac { background: #fff; color: #000; border-color: #fff; }
+.b-apple { width: 17px; height: 21px; flex: none; }
+.b-txt { display: block; text-align: left; line-height: 1.14; }
+.b-txt small { display: block; font-size: .62em; letter-spacing: .01em; }
+.b-txt b { display: block; font-size: 1.05em; font-weight: 600; letter-spacing: -.01em; }
+.badge-note { display: block; font-size: .78em; color: var(--sub); margin-top: .5em; }
+/* バッジ直下の補足行が 2 行続くとき（入手表記＋対応言語）は 2 行目を詰める */
+.badge-note + .badge-note { margin-top: .15em; }
+.badge-wrap.soon .badge { opacity: .72; cursor: default; }
+.badge-wrap.soon .n-live { display: none; }
+.badge-wrap:not(.soon) .n-soon { display: none; }
+
+/* スクリーンショット */
+.shot { margin: 0; }
+.shot img, .shot video { border-radius: 14px; }
+.shot.phone { max-width: 250px; margin-inline: auto; }
+.shot.phone img { border-radius: 20px; box-shadow: var(--shadow); }
+.shot.wide { max-width: 440px; margin-inline: auto; }
+.shot.mac img, .shot.mac video, .shot.macnarrow img { box-shadow: var(--shadow); }
+.tone-y.p-kanade .shot img, .tone-y.p-kanade .shot video { border-radius: 10px; }
+.shot.macnarrow { max-width: 440px; margin-inline: auto; }
+
+/* 対応形式の表 */
+.fmt { list-style: none; padding: 0; margin: 1.4em 0 0; }
+.fmt li { display: flex; gap: 14px; padding: 11px 0; border-top: 1px solid var(--line);
+          font-size: .93em; }
+.fmt li b { min-width: 74px; }
+.fmt li span { color: var(--sub); font-family: ui-monospace, Menlo, monospace; font-size: .92em; }
+
+/* フッタ */
+.foot { padding: 34px 20px 44px; border-top: 1px solid var(--line); margin-top: 48px;
+        font-size: .82em; color: var(--sub); }
+.foot .fine, .foot .tm { margin: 0 0 1em; line-height: 1.7; max-width: 62em; }
+.foot nav { margin-bottom: .8em; }
+.foot nav a { display: inline-block; margin-right: 16px; text-decoration: underline;
+              text-underline-offset: 3px; }
+.foot .copy { margin: 0; }
+
+/* スマホ幅だけ画面下に固定する CTA（案 Y のみ・JS なし） */
+.sticky-cta { position: sticky; bottom: 0; background: var(--sticky-bg);
+              -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+              border-top: 1px solid var(--line); padding: 10px 16px; text-align: center; }
+.sticky-cta .badge-note { display: none; }
+.tone-x .sticky-cta { display: none; }
+
+/* ───────────────────────────────── 案 Y の配置 */
+.tone-y .tophero { padding: 64px 22px 12px; }
+.tone-y .tophero h1 { font-size: 2.1em; }
+.tone-y .rows { padding: 22px 22px 0; display: grid; gap: 18px; }
+/* 見出しを置かないトップ（.rows が main の先頭）では、ヘッダ直下の余白をここで作る */
+main > .rows:first-child { padding-top: 26px; }
+.tone-y .row { background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+               padding: 26px 22px; overflow: hidden; }
+.tone-y .row.kanade { background: #12151c; border-color: #1e2430; color: #e9ecf3;
+                      --sub: #98a1b0; --acc: #ff7a55; }
+.tone-y .row.kanade .badge-mac { background: #fff; color: #000; border-color: #fff; }
+.tone-y .row h2 { font-size: 1.25em; margin-top: .35em; }
+.tone-y .row .tag { color: var(--sub); font-size: .92em; }
+.tone-y .row .more { margin-top: .9em; }
+.tone-y .row .more a { color: var(--acc); font-size: .9em; text-decoration: underline;
+                       text-underline-offset: 3px; }
+.tone-y .row-img { margin: 1.6em 0 0; }
+.tone-y .row-img.phone { max-width: 150px; }
+.tone-y .row-img img { border-radius: 10px; box-shadow: var(--shadow); }
+.tone-y .contact { padding: 46px 22px 0; }
+.tone-y .contact h2 { font-size: 1.1em; }
+.tone-y .contact a { color: var(--acc); text-decoration: underline; text-underline-offset: 3px; }
+
+.tone-y .hero { padding: 54px 22px 0; }
+.tone-y .hero h1 { font-size: 2.2em; }
+.tone-y .heroshot { margin-top: 2.4em; }
+.tone-y .feat { padding: 56px 22px 0; }
+.tone-y .feat h2 { font-size: 1.5em; }
+.tone-y .feat p { color: var(--sub); }
+.tone-y .feat .shot { margin-top: 1.5em; }
+.tone-y .fmt-sec { padding: 56px 22px 0; }
+.tone-y .fmt-sec h2 { font-size: 1.5em; }
+.tone-y .close { padding: 64px 22px 54px; margin-top: 60px; background: var(--card);
+                 text-align: center; }
+.tone-y.p-kanade .close { background: #12151c; }
+.tone-y .close h2 { font-size: 1.5em; }
+.tone-y .close p { color: var(--sub); }
+
+/* ───────────────────────────────── 案 X の配置（中央揃え・縦積み・トーン統一） */
+.tone-x .tophero { padding: 62px 22px 10px; text-align: center; }
+.tone-x .tophero h1 { font-size: 2.05em; }
+.tone-x .tophero .sub { max-width: 30em; margin-inline: auto; }
+.tone-x .rows { padding: 26px 22px 0; display: grid; gap: 22px; }
+.tone-x .row { background: var(--card); border-radius: 16px; padding: 30px 24px 26px;
+               text-align: center; }
+.tone-x .row h2 { font-size: 1.22em; margin-top: 1em; }
+.tone-x .row .tag { color: var(--sub); font-size: .92em; }
+.tone-x .row .more a { color: var(--acc); font-size: .9em; }
+.tone-x .row-img { margin: 0 0 .4em; }
+.tone-x .row-img.phone { max-width: 160px; margin-inline: auto; }
+.tone-x .row-img img { border-radius: 12px; }
+.tone-x .contact { padding: 46px 22px 0; text-align: center; }
+.tone-x .contact h2 { font-size: 1.1em; }
+.tone-x .contact a { color: var(--acc); text-decoration: underline; text-underline-offset: 3px; }
+
+.tone-x .hero { padding: 62px 22px 10px; text-align: center; }
+.tone-x .hero h1 { font-size: 2.05em; }
+.tone-x .hero .cta { margin-bottom: 2.6em; }
+.tone-x .heroshot { margin-top: 2.2em; }
+.tone-x .feat { padding: 62px 22px 0; text-align: center; max-width: 720px;
+                margin-inline: auto; }
+.tone-x .feat h2 { font-size: 1.55em; }
+.tone-x .feat p { color: var(--sub); max-width: 30em; margin-inline: auto; }
+.tone-x .feat .shot { margin-top: 1.8em; }
+.tone-x .fmt-sec { padding: 62px 22px 0; max-width: 620px; margin-inline: auto;
+                   text-align: center; }
+.tone-x .fmt-sec h2 { font-size: 1.55em; }
+.tone-x .fmt li { text-align: left; }
+.tone-x .close { padding: 76px 22px 20px; text-align: center; background: var(--card);
+                 margin-top: 68px; }
+.tone-x .close h2 { font-size: 1.5em; }
+.tone-x .close p { color: var(--sub); }
+
+/* ───────────────────────────────── 広い画面 */
+@media (min-width: 700px) {
+  .nav { padding: 16px 40px; }
+  .foot { padding: 40px 40px 52px; }
+
+  /* 案 Y: 左右交互の 2 カラム。固定バッジは出さない */
+  .tone-y .tophero { padding: 96px 40px 20px; }
+  .tone-y .tophero h1 { font-size: 3.2em; }
+  .tone-y .tophero .sub { max-width: 34em; }
+  .tone-y .rows { padding: 34px 40px 0; gap: 24px; }
+  main > .rows:first-child { padding-top: 48px; }
+  .tone-y .row { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: center;
+                 padding: 40px 38px; }
+  .tone-y .row h2 { font-size: 1.8em; }
+  .tone-y .row-img { margin: 0; }
+  .tone-y .row-img.phone { max-width: 190px; margin-inline: auto; }
+  .tone-y .contact { padding: 64px 40px 0; }
+  .tone-y .hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: 40px;
+                  align-items: center; padding: 84px 40px 0; }
+  .tone-y .hero h1 { font-size: 3.3em; }
+  .tone-y .heroshot { margin-top: 0; }
+  .tone-y .heroshot.phone { max-width: 268px; }
+  .tone-y .feat { display: grid; grid-template-columns: 1fr 1.2fr; gap: 44px;
+                  align-items: center; padding: 96px 40px 0; }
+  .tone-y .feat.rev .feat-txt { order: 2; }
+  .tone-y .feat h2 { font-size: 2em; }
+  .tone-y .feat .shot { margin-top: 0; }
+  .tone-y .feat .shot.phone { max-width: 260px; }
+  .tone-y .feat .shot.wide { max-width: 100%; }
+  .tone-y .fmt-sec { padding: 96px 40px 0; max-width: 620px; }
+  .tone-y .close { padding: 96px 40px 84px; }
+  .tone-y .close h2 { font-size: 2.2em; }
+  .tone-y .sticky-cta { display: none; }
+
+  /* 案 X: 中央揃えのまま余白と文字を大きく */
+  .tone-x .hero h1, .tone-x .tophero h1 { font-size: 3.1em; }
+  .tone-x .hero, .tone-x .tophero { padding-top: 88px; }
+  .tone-x .feat h2 { font-size: 2.05em; }
+  .tone-x .feat { padding-top: 92px; }
+  .tone-x .shot.phone { max-width: 292px; }
+  .tone-x .shot.wide { max-width: 560px; }
+  .tone-x .shot.mac { max-width: 860px; margin-inline: auto; }
+  .tone-x .rows { grid-template-columns: 1fr 1fr; padding: 40px 34px 0; gap: 28px;
+                  align-items: start; }
+  .tone-x .close h2 { font-size: 2em; }
+}
+
+/* 画面全体の幅を抑える（大きいディスプレイで 1 行が長くなりすぎないように） */
+@media (min-width: 1280px) {
+  .nav, main > section, .foot { max-width: 1180px; margin-inline: auto; }
+  .tone-y .close, .tone-x .close { max-width: none; }
+  .tone-y .close > *, .tone-x .close > * { max-width: 1180px; margin-inline: auto; }
+}
