@@ -44,6 +44,11 @@ p { margin: .6em 0 0; }
 .nav { display: flex; justify-content: space-between; align-items: center;
        padding: 14px 20px; border-bottom: 1px solid var(--line); }
 .brand { font-weight: 600; font-size: .95em; letter-spacing: .02em; }
+/* トップ 2 本だけ、ヘッダーのブランド名が h1（製品ページと違ってヒーローに見出しが無く、
+   このままでは h1 のないページになる）。font-size / font-weight / letter-spacing / margin は
+   上の .brand と h1, h2 の指定がそのまま効くので、残る line-height 1.28 だけを打ち消して
+   他ページの a.brand とまったく同じ描画に戻す。 */
+h1.brand { line-height: inherit; }
 .navlinks a { font-size: .86em; color: var(--sub); text-decoration: underline;
               text-underline-offset: 3px; }
 .eyebrow { font-size: .82em; color: var(--sub); margin: 0 0 .9em; letter-spacing: .04em; }
