@@ -55,25 +55,16 @@ h1.brand { line-height: inherit; }
 .sub { color: var(--sub); font-size: 1.02em; margin-top: .9em; }
 .plat { font-size: .8em; color: var(--sub); margin: 0; letter-spacing: .04em; }
 
-/* App Store バッジ。メロディ消しゴムは Apple 公式バッジ SVG、
-   Kanade は審査中なのでリンクにしていない（.soon が外れると入手表記に変わる）。 */
+/* App Store バッジ。どちらも Apple 公式バッジ SVG（原寸は高さ 40）。
+   iOS（メロディ消しゴム）と Mac（Kanade）で幅が違うため、高さ 50px に揃えて幅は比率なりにする
+   （HTML の width/height 属性は比率の指定。iOS 150×50・Mac 英語 195×50・日本語 175×50）。 */
 .cta { margin-top: 1.7em; }
 .badge-wrap { display: inline-block; }
 .badge { display: inline-flex; align-items: center; gap: 9px; }
-.badge img { width: 150px; height: 50px; }
-.badge-mac { background: #000; color: #fff; border: 1px solid #000; border-radius: 9px;
-             padding: 9px 17px 9px 14px; }
-.tone-y.p-kanade .badge-mac { background: #fff; color: #000; border-color: #fff; }
-.b-apple { width: 17px; height: 21px; flex: none; }
-.b-txt { display: block; text-align: left; line-height: 1.14; }
-.b-txt small { display: block; font-size: .62em; letter-spacing: .01em; }
-.b-txt b { display: block; font-size: 1.05em; font-weight: 600; letter-spacing: -.01em; }
+.badge img { width: auto; height: 50px; }
 .badge-note { display: block; font-size: .78em; color: var(--sub); margin-top: .5em; }
 /* バッジ直下の補足行が 2 行続くとき（入手表記＋対応言語）は 2 行目を詰める */
 .badge-note + .badge-note { margin-top: .15em; }
-.badge-wrap.soon .badge { opacity: .72; cursor: default; }
-.badge-wrap.soon .n-live { display: none; }
-.badge-wrap:not(.soon) .n-soon { display: none; }
 
 /* スクリーンショット */
 .shot { margin: 0; }
@@ -118,7 +109,6 @@ main > .rows:first-child { padding-top: 26px; }
                padding: 26px 22px; overflow: hidden; }
 .tone-y .row.kanade { background: #12151c; border-color: #1e2430; color: #e9ecf3;
                       --sub: #98a1b0; --acc: #ff7a55; }
-.tone-y .row.kanade .badge-mac { background: #fff; color: #000; border-color: #fff; }
 .tone-y .row h2 { font-size: 1.25em; margin-top: .35em; }
 .tone-y .row .tag { color: var(--sub); font-size: .92em; }
 .tone-y .row .more { margin-top: .9em; }
