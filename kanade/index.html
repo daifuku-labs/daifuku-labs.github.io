@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kanade MIDI Player｜落ちてくるノーツで見て聴く Mac の MIDI プレーヤー</title>
-<meta name="description" content="88 鍵の鍵盤に落ちてくるノーツを見ながら聴ける Mac 用 MIDI プレーヤー。SMF・RCP・banbro 形式に対応し、GS / XG を自動判定。内蔵音源でも外部 MIDI 音源でも鳴らせます。">
+<meta name="description" content="88 鍵の鍵盤に落ちてくるノーツを見ながら聴ける Mac 用 MIDI プレーヤー。SMF・RCP・banbro・SMAF（着メロ）形式に対応し、GS / XG を自動判定。内蔵音源でも外部 MIDI 音源でも鳴らせます。">
 <link rel="canonical" href="https://daifuku-labs.com/kanade/">
 <link rel="alternate" hreflang="ja" href="https://daifuku-labs.com/kanade/">
 <link rel="alternate" hreflang="en" href="https://daifuku-labs.com/kanade/en/">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="daifuku labs">
 <meta property="og:title" content="Kanade MIDI Player｜落ちてくるノーツで見て聴く Mac の MIDI プレーヤー">
-<meta property="og:description" content="88 鍵の鍵盤に落ちてくるノーツを見ながら聴ける Mac 用 MIDI プレーヤー。SMF・RCP・banbro 形式に対応し、GS / XG を自動判定。内蔵音源でも外部 MIDI 音源でも鳴らせます。">
+<meta property="og:description" content="88 鍵の鍵盤に落ちてくるノーツを見ながら聴ける Mac 用 MIDI プレーヤー。SMF・RCP・banbro・SMAF（着メロ）形式に対応し、GS / XG を自動判定。内蔵音源でも外部 MIDI 音源でも鳴らせます。">
 <meta property="og:url" content="https://daifuku-labs.com/kanade/">
 <meta property="og:image" content="https://daifuku-labs.com/assets/og/kanade.jpg">
 <meta property="og:locale" content="ja_JP">
@@ -35,32 +35,36 @@
 </section>
 <section class="feat">
   <div class="feat-txt"><h2>ノーツを可視化</h2><p>鍵盤に向かってノーツが流れます。どのパートがどこを弾いているのかが、聴く前に分かります。</p></div>
-  <figure class="shot mac"><img class="" src="/assets/img/kanade/flow.jpg" srcset="/assets/img/kanade/flow.jpg 1x, /assets/img/kanade/flow@2x.jpg 2x" width="900" height="562" alt="FLOW-12 表示の再生画面。鍵盤に向かってノーツが落ちてくる" loading="lazy" decoding="async"></figure>
+  <figure class="shot mac"><img class="" src="/assets/img/kanade/flow.jpg" srcset="/assets/img/kanade/flow.jpg 1x, /assets/img/kanade/flow@2x.jpg 2x" width="900" height="562" alt="FLOW 表示の再生画面。鍵盤に向かってノーツが落ちてくる" loading="lazy" decoding="async"></figure>
 </section>
 <section class="feat rev">
   <div class="feat-txt"><h2>ドラムだって可視化</h2><p>キック、スネア、ハイハット、タムを別々のレーンで表示します。パターンがそのまま読めます。</p></div>
-  <figure class="shot mac"><img class="" src="/assets/img/kanade/drum.jpg" srcset="/assets/img/kanade/drum.jpg 1x, /assets/img/kanade/drum@2x.jpg 2x" width="900" height="562" alt="DRUM 表示の再生画面。打楽器ごとにレーンが分かれている" loading="lazy" decoding="async"></figure>
+  <figure class="shot mac"><img class="" src="/assets/img/kanade/drum.jpg" srcset="/assets/img/kanade/drum.jpg 1x, /assets/img/kanade/drum@2x.jpg 2x" width="900" height="562" alt="DRUMS 表示の再生画面。打楽器ごとにレーンが分かれている" loading="lazy" decoding="async"></figure>
 </section>
 <section class="feat">
-  <div class="feat-txt"><h2>16 パートを一度に。</h2><p>88 鍵の鍵盤をパートの数だけ縦に並べた FULL 表示。全体の動きを俯瞰できます。</p></div>
-  <figure class="shot mac"><img class="" src="/assets/img/kanade/full.jpg" srcset="/assets/img/kanade/full.jpg 1x, /assets/img/kanade/full@2x.jpg 2x" width="900" height="578" alt="FULL 表示の再生画面。16 パート分の鍵盤が縦に並ぶ" loading="lazy" decoding="async"></figure>
+  <div class="feat-txt"><h2>16 パートを一度に。</h2><p>88 鍵の鍵盤をパートの数だけ縦に並べた KEYS 表示。全体の動きを俯瞰できます。</p></div>
+  <figure class="shot mac"><img class="" src="/assets/img/kanade/full.jpg" srcset="/assets/img/kanade/full.jpg 1x, /assets/img/kanade/full@2x.jpg 2x" width="900" height="578" alt="KEYS 表示の再生画面。16 パート分の鍵盤が縦に並ぶ" loading="lazy" decoding="async"></figure>
 </section>
 <section class="feat rev">
   <div class="feat-txt"><h2>GS / XG だって、きちんと再生。</h2><p>GSやXG向けのMIDIなどを再生しても、近い音色に置き換えて再生します。パートが歯抜けになりません。</p></div>
   <figure class="shot macnarrow"><img class="" src="/assets/img/kanade/parts.jpg" srcset="/assets/img/kanade/parts.jpg 1x, /assets/img/kanade/parts@2x.jpg 2x" width="479" height="615" alt="再生画面のパート一覧。GS のファイルを読み込んでも A01〜A16 の 16 パートすべてに音色名が並び、歯抜けがない" loading="lazy" decoding="async"></figure>
 </section>
 <section class="feat">
+  <div class="feat-txt"><h2>曲の中身まで、のぞける。</h2><p>EVENTS で曲のイベントを時系列に、STATUS でアプリが曲に施している互換処理を一覧で。TAG INFO などの窓も、メインの横に並べて開けます。</p></div>
+  <figure class="shot mac"><img class="" src="/assets/img/kanade/windows.jpg" srcset="/assets/img/kanade/windows.jpg 1x, /assets/img/kanade/windows@2x.jpg 2x" width="900" height="562" alt="補助ウインドウ（EVENTS・STATUS・TAG INFO・METERS）をメインの横に並べた画面" loading="lazy" decoding="async"></figure>
+</section>
+<section class="feat rev">
   <div class="feat-txt"><h2>内蔵音源、外部音源、もちろんどちらも使えます。</h2><p>Mac 標準の音源や SoundFont のほか、USB・Bluetoothなどで繋いだハードウェアMIDI音源も当然使えます。</p></div>
   <figure class="shot mac"><img class="" src="/assets/img/kanade/settings.jpg" srcset="/assets/img/kanade/settings.jpg 1x, /assets/img/kanade/settings@2x.jpg 2x" width="900" height="562" alt="設定ウインドウの MIDI 出力タブ。ポート A / B の宛先を内蔵音源か外部 MIDI ポートから選ぶ" loading="lazy" decoding="async"></figure>
 </section>
-<section class="fmt-sec"><h2>数十年間のコレクションが、今息を吹き返す。</h2><ul class="fmt"><li><b>SMF</b><span>.mid / .midi / .rmi / .kar</span></li><li><b>RCP</b><span>.rcp / .r36 / .g36 / .g18</span></li><li><b>banbro</b><span>.bbs / .bdx / .bbp</span></li></ul></section>
+<section class="fmt-sec"><h2>数十年間のコレクションが、今息を吹き返す。</h2><ul class="fmt"><li><b>SMF</b><span>.mid / .midi / .rmi / .kar</span></li><li><b>RCP</b><span>.rcp / .r36 / .g36 / .g18</span></li><li><b>banbro</b><span>.bbs / .bdx / .bbp</span></li><li><b>SMAF</b><span>.mmf（着メロ）</span></li><li><b>WRD</b><span>.wrd / .sry（歌詞と演出の表示）</span></li></ul></section>
 <section class="close">
   <h2>あの頃の MIDI を、今の Mac で。</h2>
   <p>手元のファイルを、そのまま開いてください。</p>
   <div class="cta"><span class="badge-wrap"><a class="badge" href="https://apps.apple.com/app/apple-store/id6810732463?pt=129254985&amp;ct=site&amp;mt=12"><img src="/assets/img/mac-appstore-badge-ja.svg" alt="Mac App Store でダウンロード" width="175" height="50"></a><span class="badge-note">Mac App Store で入手</span></span></div>
 </section>
 </main>
-<footer class="foot"><p class="fine">各曲の再生は冒頭 90 秒までです。アプリ内課金「フル版」で制限が外れます。</p><p class="tm">GS・XG は各社の登録商標です。本文中の形式名・製品名は、本アプリが読み込めるファイルの種類を示すためだけに用いています。</p><nav><a href="./support.html">サポート</a> <a href="./privacy-policy.html">プライバシーポリシー</a> <a href="/kanade/en/">English</a></nav><p class="copy">&copy; 2026 daifuku labs</p></footer>
+<footer class="foot"><p class="fine">各曲の再生は冒頭 90 秒までです。アプリ内課金「フル版」で制限が外れます。</p><p class="tm">GS・XG・SMAF は各社の登録商標です。本文中の形式名・製品名は、本アプリが読み込めるファイルの種類を示すためだけに用いています。</p><nav><a href="./support.html">サポート</a> <a href="./privacy-policy.html">プライバシーポリシー</a> <a href="/kanade/en/">English</a></nav><p class="copy">&copy; 2026 daifuku labs</p></footer>
 <div class="sticky-cta"><span class="badge-wrap"><a class="badge" href="https://apps.apple.com/app/apple-store/id6810732463?pt=129254985&amp;ct=site&amp;mt=12"><img src="/assets/img/mac-appstore-badge-ja.svg" alt="Mac App Store でダウンロード" width="175" height="50"></a><span class="badge-note">Mac App Store で入手</span></span></div>
 </body>
 </html>
