@@ -4,7 +4,7 @@
  *   .tone-y … 採用案（製品ごとに世界観。トップ＝紙色／メロディ消しゴム＝暖色／Kanade＝ダーク。
  *              画像とテキストの左右交互。スマホ幅では画面下に固定の App Store バッジ）
  *   .tone-x … 予備案（全ページ白基調で統一。中央揃えの縦積み。固定バッジなし）
- * 製品ごとの色は .p-top / .p-melody-eraser / .p-kanade が担う。
+ * 製品ごとの色は .p-top / .p-melody-eraser / .p-kanade が担う（Kanade 着メロ プレーヤーはトップのカードだけ .row.kanade と同じ色。製品ページは独自のレトロな作りで site.css を使わない）。
  * JavaScript は使わない。固定バッジは position: sticky だけで実現している。
  */
 
@@ -107,7 +107,7 @@ h1.brand { line-height: inherit; }
 main > .rows:first-child { padding-top: 26px; }
 .tone-y .row { background: var(--card); border: 1px solid var(--line); border-radius: 14px;
                padding: 26px 22px; overflow: hidden; }
-.tone-y .row.kanade { background: #12151c; border-color: #1e2430; color: #e9ecf3;
+.tone-y .row.kanade, .tone-y .row.kanade-ringtone { background: #12151c; border-color: #1e2430; color: #e9ecf3;
                       --sub: #98a1b0; --acc: #ff7a55; }
 .tone-y .row h2 { font-size: 1.25em; margin-top: .35em; }
 .tone-y .row .tag { color: var(--sub); font-size: .92em; }

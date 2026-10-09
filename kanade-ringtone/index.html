@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kanade 着メロ プレーヤー｜あの着メロを iPhone で鳴らして着信音にするアプリ</title>
+<meta name="description" content="携帯電話の着信メロディ（SMAF・.mmf）を iPhone で鳴らして、30 秒未満の着信音（.m4a）に書き出せるアプリ。再生画面は PARTS・FLOW・DRUMS の 3 つ。曲は端末の中だけに置きます。無料で使えます。">
+<link rel="canonical" href="https://daifuku-labs.com/kanade-ringtone/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="daifuku labs">
+<meta property="og:title" content="Kanade 着メロ プレーヤー｜あの着メロを iPhone で鳴らして着信音にするアプリ">
+<meta property="og:description" content="携帯電話の着信メロディ（SMAF・.mmf）を iPhone で鳴らして、30 秒未満の着信音（.m4a）に書き出せるアプリ。再生画面は PARTS・FLOW・DRUMS の 3 つ。曲は端末の中だけに置きます。無料で使えます。">
+<meta property="og:url" content="https://daifuku-labs.com/kanade-ringtone/">
+<meta property="og:image" content="https://daifuku-labs.com/assets/og/kanade-ringtone.jpg">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<!-- APPSTORE_URL: 審査通過後に差し替え（下の JSON-LD の offers.url。いまはサポートのページ） -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Kanade 着メロ プレーヤー",
+  "description": "携帯電話の着信メロディ（SMAF・.mmf）を iPhone で鳴らして、30 秒未満の着信音（.m4a）に書き出せるアプリ。再生画面は PARTS・FLOW・DRUMS の 3 つ。曲は端末の中だけに置きます。無料で使えます。",
+  "url": "https://daifuku-labs.com/kanade-ringtone/",
+  "image": "https://daifuku-labs.com/assets/og/kanade-ringtone.jpg",
+  "operatingSystem": "iOS 26.0 or later",
+  "applicationCategory": "MultimediaApplication",
+  "inLanguage": [
+    "ja"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY",
+    "url": "https://daifuku-labs.com/kanade-ringtone/support.html"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://daifuku-labs.com/#organization",
+    "name": "daifuku labs",
+    "url": "https://daifuku-labs.com/",
+    "email": "support@daifuku-labs.com"
+  },
+  "author": {
+    "@type": "Organization",
+    "@id": "https://daifuku-labs.com/#organization",
+    "name": "daifuku labs",
+    "url": "https://daifuku-labs.com/",
+    "email": "support@daifuku-labs.com"
+  }
+}
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "9dd29a2d1fa041be908ff33ad7f03ffd"}'></script>
+<script>document.documentElement.className += " js";</script>
+<style>
+  /* 書体 DotGothic16 は Google から読み込まず、このページで使う字だけに切り出したものを同じ場所に置く（生成スクリプトが作り直す） */
+  @font-face { font-family: "DotGothic16"; src: url("dotgothic16-subset.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; color: #222;
+    background: #dfe4ea repeating-linear-gradient(45deg, transparent 0 6px, rgba(255,255,255,.45) 6px 12px);
+    font: 14px/1.65 "DotGothic16", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+  }
+  a { color: #0033cc; text-decoration: underline; }
+  a:visited { color: #6a1b9a; }
+  a:hover, a:focus { color: #e4006f; background: #fff27a; }
+  .px { display: inline-block; vertical-align: -2px; shape-rendering: crispEdges; image-rendering: pixelated; flex: none; }
+  .vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .col { max-width: 480px; margin: 0 auto; background: #fff; border-inline: 1px solid #b6c0cc; min-height: 100vh; overflow-x: hidden; }
+
+  /* 上の帯（電波・時計・電池。どれも自作のドット絵） */
+  .sbar { display: flex; align-items: center; gap: 6px; padding: 3px 8px; font-size: 11px; background: #f1f3f6; border-bottom: 1px solid #cfd5dd; }
+  .sbar .sp { flex: 1; }
+  .sbar a { color: #222; text-decoration: none; font-weight: 700; }
+  .clock { font-variant-numeric: tabular-nums; }
+  .colon-off .clock .c { visibility: hidden; }
+
+  /* 頭 */
+  .chead { background: #1f5fd1; color: #fff; text-align: center; padding: 12px 10px 10px; border-bottom: 3px solid #ff7a00; position: relative; }
+  .chead .cicon { display: block; width: 60px; height: 60px; border-radius: 13px; margin: 0 auto 6px; border: 2px solid #fff; }
+  .chead h1 { font-size: 18px; font-weight: 400; margin: 0; line-height: 1.4; }
+  .chead .note { color: #ffd84a; }
+  .chead .sub { margin: 2px 0 0; font-size: 12px; color: #dbe6ff; }
+  .chead .secret { display: inline-block; margin-top: 6px; padding: 1px 8px; background: #fff; color: #e4006f; font-size: 12px; border-radius: 9px; }
+  .chead .st1, .chead .st2 { position: absolute; top: 14px; }
+  .chead .st1 { left: 14px; } .chead .st2 { right: 14px; }
+
+  /* 流れる文字（JS が動かす。JS が無い・止めたときは折り返して全部読める） */
+  .mq { overflow: hidden; position: relative; }
+  .mq-in { display: inline-block; padding: 0 4px; }
+  .js:not(.still) .mq-in { white-space: nowrap; will-change: transform; }
+  .ticker { background: #fff4e0; border-bottom: 1px dashed #ff7a00; padding: 4px 0; font-size: 13px; color: #a64400; }
+  .bounce { background: #000; color: #7dff7a; font-size: 13px; padding: 3px 0; }
+  .byebye { background: #ffe6f1; color: #a0004d; font-size: 13px; padding: 3px 0; border-block: 1px solid #f3a6c8; }
+
+  /* 点滅（JS が 0.5 秒ごとに切り替え＝1 秒に 1 回） */
+  .phase .blink { visibility: hidden; }
+  .newmark { display: inline-block; background: #e4006f; color: #fff; font-size: 10px; line-height: 1; padding: 3px 4px 2px; border-radius: 2px; margin-right: 4px; vertical-align: 1px; }
+
+  /* 虹の罫線（CSS でゆっくり流れる） */
+  .rule { height: 4px; background: linear-gradient(90deg, #ff3b8b, #ff9a00, #ffd400, #2ecc40, #1f9bff, #8a4dff, #ff3b8b) 0 0 / 200% 100%; }
+  .js:not(.still) .rule { animation: rule 6s linear infinite; }
+  @keyframes rule { to { background-position: -200% 0; } }
+  .deco { overflow: hidden; white-space: nowrap; text-align: center; color: #f08ab8; font-size: 12px; line-height: 1.2; margin: 8px 0; letter-spacing: 1px; }
+  .dots { border: 0; height: 0; border-top: 2px dotted #9fb3d9; margin: 10px 12px; }
+
+  .intro { padding: 10px 12px 4px; }
+  .intro p { margin: 0 0 .6em; }
+  .big { font-size: 16px; color: #1f5fd1; }
+  .go { display: block; text-align: center; margin: 8px 0 4px; font-size: 15px; }
+
+  /* カウンター（あなたのブラウザで数えた、あなた自身の回数） */
+  .counter { margin: 6px 12px 0; padding: 8px; border: 2px ridge #c7cfdb; background: #f7f9fc; text-align: center; font-size: 12px; }
+  .digits { display: inline-flex; gap: 2px; margin: 4px 0; }
+  .digits span { display: inline-block; width: 18px; padding: 2px 0; background: #111; color: #7dff7a; font-size: 16px; line-height: 1.2; border-radius: 2px; box-shadow: inset 0 -2px 0 #333; }
+  .counter .cnote { display: block; color: #666; font-size: 11px; margin-top: 2px; }
+  .kiriban { display: none; margin-top: 4px; font-size: 14px; }
+  .kiriban.on { display: block; }
+
+  /* 目次（数字キーで飛べる） */
+  .band { display: flex; gap: 6px; align-items: center; background: #ffe6f1; border-block: 1px solid #f3a6c8; font-size: 14px; font-weight: 400; padding: 4px 8px; margin: 0; color: #a0004d; }
+  .menu { list-style: none; margin: 0; padding: 0; }
+  .menu li { border-bottom: 1px dotted #bbb; }
+  .menu a { display: flex; gap: 8px; align-items: center; padding: 6px 10px; }
+  .key { display: inline-grid; place-items: center; width: 19px; height: 19px; border-radius: 4px; background: #1f5fd1; color: #fff; font-size: 12px; line-height: 1; flex: none; text-decoration: none; }
+  .menu .hint { padding: 4px 10px 6px; font-size: 11px; color: #666; border: 0; }
+
+  .sec { margin-top: 12px; scroll-margin-top: 4px; }
+  .sec:target .band { background: #fff27a; }
+  .body { padding: 8px 12px 2px; }
+  .body p { margin: 0 0 .6em; }
+  .body ul, .body ol { margin: 0 0 .6em; padding-left: 1.4em; }
+  .body li { margin-bottom: .3em; }
+  .icons { list-style: none; padding: 0 !important; }
+  .icons li { display: flex; gap: 8px; align-items: flex-start; }
+  .icons .px { margin-top: 3px; }
+  .news { list-style: none; padding: 0 !important; }
+  .news li { padding: 4px 0; border-bottom: 1px dashed #ddd; }
+  .news time { color: #1f5fd1; margin-right: 4px; }
+  .totop { text-align: right; font-size: 12px; margin: 0; padding: 0 12px 4px; }
+  .totop a { display: inline-flex; gap: 4px; align-items: center; }
+  .totop .key { width: 15px; height: 15px; font-size: 10px; }
+
+  table.tab { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: .6em; }
+  .tab th, .tab td { border: 1px solid #bbb; padding: 5px 7px; text-align: left; vertical-align: top; }
+  .tab th { background: #eef3ff; white-space: nowrap; font-weight: 400; color: #1f5fd1; }
+
+  /* 着信中のケータイ（ドット絵 2 枚を 0.5 秒ごとに入れ替え） */
+  .shotrow { display: flex; gap: 10px; align-items: flex-start; }
+  .shotrow .icons { flex: 1; min-width: 0; margin: 0; }
+  .shot { flex: none; width: 122px; margin: 0; text-align: center; }
+  .shot img { display: block; width: 120px; height: auto; border: 1px solid #888; image-rendering: pixelated; }
+  .shot figcaption { font-size: 10px; line-height: 1.45; color: #666; margin-top: 3px; text-align: left; }
+  @media (max-width: 340px) { .shotrow { flex-direction: column; align-items: center; } }
+  .ringbox { display: flex; gap: 12px; align-items: center; justify-content: center; padding: 8px 0 4px; }
+  .ring { position: relative; width: 66px; height: 54px; }
+  .ring .ph { position: absolute; left: 22px; top: 0; }
+  .ring .lit { display: none; }
+  .phase .ring .lit { display: block; }
+  .phase .ring .dark { display: none; }
+  .phase .ring .ph { transform: translateX(1px); }
+  .ring .n1 { position: absolute; left: 2px; top: 6px; }
+  .ring .n2 { position: absolute; right: 0; top: 20px; }
+  .phase .ring .n1 { top: 2px; }
+  .phase .ring .n2 { top: 16px; }
+  .ringtxt { font-size: 12px; color: #a0004d; }
+
+  .rainbow-k { color: #e4006f; }
+  .fortune { text-align: center; }
+  .fortune b { font-weight: 400; font-size: 16px; color: #e4006f; }
+
+  .links { list-style: none; padding: 0 !important; }
+  .links li { padding: 3px 0; }
+  .links a { display: inline-flex; gap: 6px; align-items: center; }
+
+  .foot { border-top: 3px solid #1f5fd1; margin-top: 14px; padding: 10px 12px 14px; font-size: 11px; color: #555; }
+  .foot p { margin: 0 0 .7em; }
+  .motion { text-align: center; }
+  .motion button { font: inherit; font-size: 12px; padding: 4px 10px; border: 2px outset #d7dce4; background: #eef1f5; color: #222; border-radius: 0; cursor: pointer; }
+  .motion button:active { border-style: inset; }
+  .motion button[disabled] { color: #777; cursor: default; }
+  .copy, .flinks { text-align: center; }
+
+  /* 動きを止める（端末の設定「視差効果を減らす」など） */
+  @media (prefers-reduced-motion: reduce) {
+    .mq-in { white-space: normal !important; transform: none !important; }
+    .blink { visibility: visible !important; }
+    .rule { animation: none !important; }
+    .ring .lit { display: none !important; }
+    .ring .dark { display: block !important; }
+    .ring .ph { transform: none !important; }
+    .clock .c { visibility: visible !important; }
+    html { scroll-behavior: auto !important; }
+  }
+  .still .mq-in { white-space: normal; transform: none !important; }
+  .still .blink, .still .clock .c { visibility: visible !important; }
+  .still .ring .lit { display: none !important; }
+  .still .ring .dark { display: block !important; }
+  .still .ring .ph { transform: none !important; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="px-note" viewBox="0 0 10 11"><rect x="5" y="0" width="2" height="1" fill="#e4006f"/><rect x="5" y="1" width="3" height="1" fill="#e4006f"/><rect x="5" y="2" width="1" height="1" fill="#e4006f"/><rect x="7" y="2" width="2" height="1" fill="#e4006f"/><rect x="5" y="3" width="1" height="1" fill="#e4006f"/><rect x="8" y="3" width="2" height="1" fill="#e4006f"/><rect x="5" y="4" width="1" height="1" fill="#e4006f"/><rect x="9" y="4" width="1" height="1" fill="#e4006f"/><rect x="5" y="5" width="1" height="1" fill="#e4006f"/><rect x="5" y="6" width="1" height="1" fill="#e4006f"/><rect x="2" y="7" width="4" height="1" fill="#e4006f"/><rect x="1" y="8" width="5" height="1" fill="#e4006f"/><rect x="1" y="9" width="5" height="1" fill="#e4006f"/><rect x="2" y="10" width="3" height="1" fill="#e4006f"/></symbol><symbol id="px-note2" viewBox="0 0 9 9"><rect x="2" y="0" width="7" height="1" fill="#1f5fd1"/><rect x="2" y="1" width="7" height="1" fill="#1f5fd1"/><rect x="2" y="2" width="1" height="1" fill="#1f5fd1"/><rect x="8" y="2" width="1" height="1" fill="#1f5fd1"/><rect x="2" y="3" width="1" height="1" fill="#1f5fd1"/><rect x="8" y="3" width="1" height="1" fill="#1f5fd1"/><rect x="2" y="4" width="1" height="1" fill="#1f5fd1"/><rect x="8" y="4" width="1" height="1" fill="#1f5fd1"/><rect x="1" y="5" width="2" height="1" fill="#1f5fd1"/><rect x="7" y="5" width="2" height="1" fill="#1f5fd1"/><rect x="0" y="6" width="3" height="1" fill="#1f5fd1"/><rect x="6" y="6" width="3" height="1" fill="#1f5fd1"/><rect x="0" y="7" width="3" height="1" fill="#1f5fd1"/><rect x="6" y="7" width="3" height="1" fill="#1f5fd1"/><rect x="1" y="8" width="1" height="1" fill="#1f5fd1"/><rect x="7" y="8" width="1" height="1" fill="#1f5fd1"/></symbol><symbol id="px-phone" viewBox="0 0 11 17"><rect x="8" y="0" width="1" height="1" fill="#4a5a78"/><rect x="8" y="1" width="1" height="1" fill="#4a5a78"/><rect x="1" y="2" width="9" height="1" fill="#4a5a78"/><rect x="1" y="3" width="1" height="1" fill="#4a5a78"/><rect x="2" y="3" width="7" height="1" fill="#9fe0ff"/><rect x="9" y="3" width="1" height="1" fill="#4a5a78"/><rect x="1" y="4" width="1" height="1" fill="#4a5a78"/><rect x="2" y="4" width="1" height="1" fill="#9fe0ff"/><rect x="3" y="4" width="1" height="1" fill="#ffffff"/><rect x="4" y="4" width="5" height="1" fill="#9fe0ff"/><rect x="9" y="4" width="1" height="1" fill="#4a5a78"/><rect x="1" y="5" width="1" height="1" fill="#4a5a78"/><rect x="2" y="5" width="7" height="1" fill="#9fe0ff"/><rect x="9" y="5" width="1" height="1" fill="#4a5a78"/><rect x="1" y="6" width="1" height="1" fill="#4a5a78"/><rect x="2" y="6" width="7" height="1" fill="#9fe0ff"/><rect x="9" y="6" width="1" height="1" fill="#4a5a78"/><rect x="1" y="7" width="9" height="1" fill="#4a5a78"/><rect x="2" y="8" width="7" height="1" fill="#4a5a78"/><rect x="1" y="9" width="9" height="1" fill="#4a5a78"/><rect x="1" y="10" width="2" height="1" fill="#4a5a78"/><rect x="3" y="10" width="1" height="1" fill="#dfe6f0"/><rect x="4" y="10" width="1" height="1" fill="#4a5a78"/><rect x="5" y="10" width="1" height="1" fill="#dfe6f0"/><rect x="6" y="10" width="1" height="1" fill="#4a5a78"/><rect x="7" y="10" width="1" height="1" fill="#dfe6f0"/><rect x="8" y="10" width="2" height="1" fill="#4a5a78"/><rect x="1" y="11" width="9" height="1" fill="#4a5a78"/><rect x="1" y="12" width="2" height="1" fill="#4a5a78"/><rect x="3" y="12" width="1" height="1" fill="#dfe6f0"/><rect x="4" y="12" width="1" height="1" fill="#4a5a78"/><rect x="5" y="12" width="1" height="1" fill="#dfe6f0"/><rect x="6" y="12" width="1" height="1" fill="#4a5a78"/><rect x="7" y="12" width="1" height="1" fill="#dfe6f0"/><rect x="8" y="12" width="2" height="1" fill="#4a5a78"/><rect x="1" y="13" width="9" height="1" fill="#4a5a78"/><rect x="1" y="14" width="2" height="1" fill="#4a5a78"/><rect x="3" y="14" width="1" height="1" fill="#dfe6f0"/><rect x="4" y="14" width="1" height="1" fill="#4a5a78"/><rect x="5" y="14" width="1" height="1" fill="#dfe6f0"/><rect x="6" y="14" width="1" height="1" fill="#4a5a78"/><rect x="7" y="14" width="1" height="1" fill="#dfe6f0"/><rect x="8" y="14" width="2" height="1" fill="#4a5a78"/><rect x="1" y="15" width="9" height="1" fill="#4a5a78"/><rect x="2" y="16" width="7" height="1" fill="#4a5a78"/></symbol><symbol id="px-phone-lit" viewBox="0 0 11 17"><rect x="8" y="0" width="1" height="1" fill="#ff3b8b"/><rect x="8" y="1" width="1" height="1" fill="#ff3b8b"/><rect x="1" y="2" width="9" height="1" fill="#4a5a78"/><rect x="1" y="3" width="1" height="1" fill="#4a5a78"/><rect x="2" y="3" width="7" height="1" fill="#ffb3d4"/><rect x="9" y="3" width="1" height="1" fill="#4a5a78"/><rect x="1" y="4" width="1" height="1" fill="#4a5a78"/><rect x="2" y="4" width="1" height="1" fill="#ffb3d4"/><rect x="3" y="4" width="1" height="1" fill="#ffffff"/><rect x="4" y="4" width="5" height="1" fill="#ffb3d4"/><rect x="9" y="4" width="1" height="1" fill="#4a5a78"/><rect x="1" y="5" width="1" height="1" fill="#4a5a78"/><rect x="2" y="5" width="7" height="1" fill="#ffb3d4"/><rect x="9" y="5" width="1" height="1" fill="#4a5a78"/><rect x="1" y="6" width="1" height="1" fill="#4a5a78"/><rect x="2" y="6" width="7" height="1" fill="#ffb3d4"/><rect x="9" y="6" width="1" height="1" fill="#4a5a78"/><rect x="1" y="7" width="9" height="1" fill="#4a5a78"/><rect x="2" y="8" width="7" height="1" fill="#4a5a78"/><rect x="1" y="9" width="9" height="1" fill="#4a5a78"/><rect x="1" y="10" width="2" height="1" fill="#4a5a78"/><rect x="3" y="10" width="1" height="1" fill="#fff27a"/><rect x="4" y="10" width="1" height="1" fill="#4a5a78"/><rect x="5" y="10" width="1" height="1" fill="#fff27a"/><rect x="6" y="10" width="1" height="1" fill="#4a5a78"/><rect x="7" y="10" width="1" height="1" fill="#fff27a"/><rect x="8" y="10" width="2" height="1" fill="#4a5a78"/><rect x="1" y="11" width="9" height="1" fill="#4a5a78"/><rect x="1" y="12" width="2" height="1" fill="#4a5a78"/><rect x="3" y="12" width="1" height="1" fill="#fff27a"/><rect x="4" y="12" width="1" height="1" fill="#4a5a78"/><rect x="5" y="12" width="1" height="1" fill="#fff27a"/><rect x="6" y="12" width="1" height="1" fill="#4a5a78"/><rect x="7" y="12" width="1" height="1" fill="#fff27a"/><rect x="8" y="12" width="2" height="1" fill="#4a5a78"/><rect x="1" y="13" width="9" height="1" fill="#4a5a78"/><rect x="1" y="14" width="2" height="1" fill="#4a5a78"/><rect x="3" y="14" width="1" height="1" fill="#fff27a"/><rect x="4" y="14" width="1" height="1" fill="#4a5a78"/><rect x="5" y="14" width="1" height="1" fill="#fff27a"/><rect x="6" y="14" width="1" height="1" fill="#4a5a78"/><rect x="7" y="14" width="1" height="1" fill="#fff27a"/><rect x="8" y="14" width="2" height="1" fill="#4a5a78"/><rect x="1" y="15" width="9" height="1" fill="#4a5a78"/><rect x="2" y="16" width="7" height="1" fill="#4a5a78"/></symbol><symbol id="px-star" viewBox="0 0 9 9"><rect x="4" y="0" width="1" height="1" fill="#e07a00"/><rect x="3" y="1" width="1" height="1" fill="#e07a00"/><rect x="4" y="1" width="1" height="1" fill="#ffc400"/><rect x="5" y="1" width="1" height="1" fill="#e07a00"/><rect x="3" y="2" width="1" height="1" fill="#e07a00"/><rect x="4" y="2" width="1" height="1" fill="#ffc400"/><rect x="5" y="2" width="1" height="1" fill="#e07a00"/><rect x="0" y="3" width="4" height="1" fill="#e07a00"/><rect x="4" y="3" width="1" height="1" fill="#ffc400"/><rect x="5" y="3" width="4" height="1" fill="#e07a00"/><rect x="1" y="4" width="1" height="1" fill="#e07a00"/><rect x="2" y="4" width="5" height="1" fill="#ffc400"/><rect x="7" y="4" width="1" height="1" fill="#e07a00"/><rect x="2" y="5" width="1" height="1" fill="#e07a00"/><rect x="3" y="5" width="3" height="1" fill="#ffc400"/><rect x="6" y="5" width="1" height="1" fill="#e07a00"/><rect x="1" y="6" width="1" height="1" fill="#e07a00"/><rect x="2" y="6" width="2" height="1" fill="#ffc400"/><rect x="4" y="6" width="1" height="1" fill="#e07a00"/><rect x="5" y="6" width="2" height="1" fill="#ffc400"/><rect x="7" y="6" width="1" height="1" fill="#e07a00"/><rect x="1" y="7" width="1" height="1" fill="#e07a00"/><rect x="2" y="7" width="1" height="1" fill="#ffc400"/><rect x="3" y="7" width="1" height="1" fill="#e07a00"/><rect x="5" y="7" width="1" height="1" fill="#e07a00"/><rect x="6" y="7" width="1" height="1" fill="#ffc400"/><rect x="7" y="7" width="1" height="1" fill="#e07a00"/><rect x="1" y="8" width="2" height="1" fill="#e07a00"/><rect x="6" y="8" width="2" height="1" fill="#e07a00"/></symbol><symbol id="px-heart" viewBox="0 0 9 8"><rect x="1" y="0" width="2" height="1" fill="#ff3b8b"/><rect x="6" y="0" width="2" height="1" fill="#ff3b8b"/><rect x="0" y="1" width="1" height="1" fill="#ff3b8b"/><rect x="1" y="1" width="1" height="1" fill="#ffffff"/><rect x="2" y="1" width="2" height="1" fill="#ff3b8b"/><rect x="5" y="1" width="4" height="1" fill="#ff3b8b"/><rect x="0" y="2" width="1" height="1" fill="#ff3b8b"/><rect x="1" y="2" width="1" height="1" fill="#ffffff"/><rect x="2" y="2" width="7" height="1" fill="#ff3b8b"/><rect x="0" y="3" width="9" height="1" fill="#ff3b8b"/><rect x="1" y="4" width="7" height="1" fill="#ff3b8b"/><rect x="2" y="5" width="5" height="1" fill="#ff3b8b"/><rect x="3" y="6" width="3" height="1" fill="#ff3b8b"/><rect x="4" y="7" width="1" height="1" fill="#ff3b8b"/></symbol><symbol id="px-mail" viewBox="0 0 11 8"><rect x="0" y="0" width="11" height="1" fill="#1f5fd1"/><rect x="0" y="1" width="2" height="1" fill="#1f5fd1"/><rect x="2" y="1" width="7" height="1" fill="#ffffff"/><rect x="9" y="1" width="2" height="1" fill="#1f5fd1"/><rect x="0" y="2" width="1" height="1" fill="#1f5fd1"/><rect x="1" y="2" width="1" height="1" fill="#ffffff"/><rect x="2" y="2" width="1" height="1" fill="#1f5fd1"/><rect x="3" y="2" width="5" height="1" fill="#ffffff"/><rect x="8" y="2" width="1" height="1" fill="#1f5fd1"/><rect x="9" y="2" width="1" height="1" fill="#ffffff"/><rect x="10" y="2" width="1" height="1" fill="#1f5fd1"/><rect x="0" y="3" width="1" height="1" fill="#1f5fd1"/><rect x="1" y="3" width="2" height="1" fill="#ffffff"/><rect x="3" y="3" width="1" height="1" fill="#1f5fd1"/><rect x="4" y="3" width="3" height="1" fill="#ffffff"/><rect x="7" y="3" width="1" height="1" fill="#1f5fd1"/><rect x="8" y="3" width="2" height="1" fill="#ffffff"/><rect x="10" y="3" width="1" height="1" fill="#1f5fd1"/><rect x="0" y="4" width="1" height="1" fill="#1f5fd1"/><rect x="1" y="4" width="3" height="1" fill="#ffffff"/><rect x="4" y="4" width="3" height="1" fill="#1f5fd1"/><rect x="7" y="4" width="3" height="1" fill="#ffffff"/><rect x="10" y="4" width="1" height="1" fill="#1f5fd1"/><rect x="0" y="5" width="1" height="1" fill="#1f5fd1"/><rect x="1" y="5" width="9" height="1" fill="#ffffff"/><rect x="10" y="5" width="1" height="1" fill="#1f5fd1"/><rect x="0" y="6" width="1" height="1" fill="#1f5fd1"/><rect x="1" y="6" width="9" height="1" fill="#ffffff"/><rect x="10" y="6" width="1" height="1" fill="#1f5fd1"/><rect x="0" y="7" width="11" height="1" fill="#1f5fd1"/></symbol><symbol id="px-help" viewBox="0 0 9 9"><rect x="2" y="0" width="5" height="1" fill="#1f5fd1"/><rect x="1" y="1" width="2" height="1" fill="#1f5fd1"/><rect x="3" y="1" width="3" height="1" fill="#ffffff"/><rect x="6" y="1" width="2" height="1" fill="#1f5fd1"/><rect x="0" y="2" width="2" height="1" fill="#1f5fd1"/><rect x="2" y="2" width="1" height="1" fill="#ffffff"/><rect x="3" y="2" width="3" height="1" fill="#1f5fd1"/><rect x="6" y="2" width="1" height="1" fill="#ffffff"/><rect x="7" y="2" width="2" height="1" fill="#1f5fd1"/><rect x="0" y="3" width="6" height="1" fill="#1f5fd1"/><rect x="6" y="3" width="1" height="1" fill="#ffffff"/><rect x="7" y="3" width="2" height="1" fill="#1f5fd1"/><rect x="0" y="4" width="4" height="1" fill="#1f5fd1"/><rect x="4" y="4" width="2" height="1" fill="#ffffff"/><rect x="6" y="4" width="3" height="1" fill="#1f5fd1"/><rect x="0" y="5" width="4" height="1" fill="#1f5fd1"/><rect x="4" y="5" width="1" height="1" fill="#ffffff"/><rect x="5" y="5" width="4" height="1" fill="#1f5fd1"/><rect x="0" y="6" width="9" height="1" fill="#1f5fd1"/><rect x="1" y="7" width="3" height="1" fill="#1f5fd1"/><rect x="4" y="7" width="1" height="1" fill="#ffffff"/><rect x="5" y="7" width="3" height="1" fill="#1f5fd1"/><rect x="2" y="8" width="5" height="1" fill="#1f5fd1"/></symbol><symbol id="px-up" viewBox="0 0 7 7"><rect x="3" y="0" width="1" height="1" fill="#1f5fd1"/><rect x="2" y="1" width="3" height="1" fill="#1f5fd1"/><rect x="1" y="2" width="5" height="1" fill="#1f5fd1"/><rect x="0" y="3" width="7" height="1" fill="#1f5fd1"/><rect x="2" y="4" width="3" height="1" fill="#1f5fd1"/><rect x="2" y="5" width="3" height="1" fill="#1f5fd1"/><rect x="2" y="6" width="3" height="1" fill="#1f5fd1"/></symbol><symbol id="px-sparkle" viewBox="0 0 7 7"><rect x="3" y="0" width="1" height="1" fill="#ffb800"/><rect x="3" y="1" width="1" height="1" fill="#ffb800"/><rect x="2" y="2" width="3" height="1" fill="#ffb800"/><rect x="0" y="3" width="3" height="1" fill="#ffb800"/><rect x="3" y="3" width="1" height="1" fill="#fff6c2"/><rect x="4" y="3" width="3" height="1" fill="#ffb800"/><rect x="2" y="4" width="3" height="1" fill="#ffb800"/><rect x="3" y="5" width="1" height="1" fill="#ffb800"/><rect x="3" y="6" width="1" height="1" fill="#ffb800"/></symbol><symbol id="px-ant" viewBox="0 0 11 8"><rect x="9" y="0" width="2" height="1" fill="#222222"/><rect x="9" y="1" width="2" height="1" fill="#222222"/><rect x="6" y="2" width="2" height="1" fill="#222222"/><rect x="9" y="2" width="2" height="1" fill="#222222"/><rect x="6" y="3" width="2" height="1" fill="#222222"/><rect x="9" y="3" width="2" height="1" fill="#222222"/><rect x="3" y="4" width="2" height="1" fill="#222222"/><rect x="6" y="4" width="2" height="1" fill="#222222"/><rect x="9" y="4" width="2" height="1" fill="#222222"/><rect x="3" y="5" width="2" height="1" fill="#222222"/><rect x="6" y="5" width="2" height="1" fill="#222222"/><rect x="9" y="5" width="2" height="1" fill="#222222"/><rect x="0" y="6" width="2" height="1" fill="#222222"/><rect x="3" y="6" width="2" height="1" fill="#222222"/><rect x="6" y="6" width="2" height="1" fill="#222222"/><rect x="9" y="6" width="2" height="1" fill="#222222"/><rect x="0" y="7" width="2" height="1" fill="#222222"/><rect x="3" y="7" width="2" height="1" fill="#222222"/><rect x="6" y="7" width="2" height="1" fill="#222222"/><rect x="9" y="7" width="2" height="1" fill="#222222"/></symbol><symbol id="px-bat" viewBox="0 0 13 7"><rect x="0" y="0" width="12" height="1" fill="#222222"/><rect x="0" y="1" width="1" height="1" fill="#222222"/><rect x="11" y="1" width="1" height="1" fill="#222222"/><rect x="0" y="2" width="1" height="1" fill="#222222"/><rect x="2" y="2" width="2" height="1" fill="#18a53a"/><rect x="5" y="2" width="2" height="1" fill="#18a53a"/><rect x="8" y="2" width="2" height="1" fill="#18a53a"/><rect x="11" y="2" width="2" height="1" fill="#222222"/><rect x="0" y="3" width="1" height="1" fill="#222222"/><rect x="2" y="3" width="2" height="1" fill="#18a53a"/><rect x="5" y="3" width="2" height="1" fill="#18a53a"/><rect x="8" y="3" width="2" height="1" fill="#18a53a"/><rect x="11" y="3" width="2" height="1" fill="#222222"/><rect x="0" y="4" width="1" height="1" fill="#222222"/><rect x="2" y="4" width="2" height="1" fill="#18a53a"/><rect x="5" y="4" width="2" height="1" fill="#18a53a"/><rect x="8" y="4" width="2" height="1" fill="#18a53a"/><rect x="11" y="4" width="2" height="1" fill="#222222"/><rect x="0" y="5" width="1" height="1" fill="#222222"/><rect x="11" y="5" width="1" height="1" fill="#222222"/><rect x="0" y="6" width="12" height="1" fill="#222222"/></symbol><symbol id="px-arrow" viewBox="0 0 5 7"><rect x="0" y="0" width="1" height="1" fill="#e4006f"/><rect x="0" y="1" width="2" height="1" fill="#e4006f"/><rect x="0" y="2" width="3" height="1" fill="#e4006f"/><rect x="0" y="3" width="4" height="1" fill="#e4006f"/><rect x="0" y="4" width="3" height="1" fill="#e4006f"/><rect x="0" y="5" width="2" height="1" fill="#e4006f"/><rect x="0" y="6" width="1" height="1" fill="#e4006f"/></symbol></svg>
+<div class="col" id="top">
+
+<div class="sbar">
+  <svg class="px" width="11" height="8" aria-hidden="true" focusable="false"><use href="#px-ant"/></svg>
+  <span class="sp"><a href="../index.html">daifuku labs</a></span>
+  <span class="clock" id="clock" aria-hidden="true">--<span class="c">:</span>--</span>
+  <svg class="px" width="13" height="7" aria-hidden="true" focusable="false"><use href="#px-bat"/></svg>
+</div>
+
+<header class="chead">
+  <span class="st1"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-sparkle"/></svg></span><span class="st2"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-sparkle"/></svg></span>
+  <img class="cicon" src="icon.png" width="60" height="60" alt="アプリのアイコン">
+  <h1><span class="note">♪</span>Kanade 着メロ プレーヤー<span class="note">♪</span></h1>
+  <p class="sub">iPhone 専用・無料（バナー広告あり）</p>
+  <span class="secret">～ あの着メロを、iPhone で ～</span>
+</header>
+
+<div class="mq ticker" data-mq="left" data-speed="48">
+  <span class="mq-in">☆★☆ ようこそ！ Kanade 着メロ プレーヤーのページへ ☆★☆ 昔のケータイの着信メロディ（.mmf）を iPhone で鳴らして、30 秒未満の着信音（.m4a）に書き出せます ♪ アプリに曲は入っていないので、お手元の .mmf をどうぞ ♪ 無料（バナー広告あり）・「広告を消す」は買い切り ☆★☆ App Store で公開準備中 ☆★☆</span>
+</div>
+<div class="rule"></div>
+
+<div class="intro">
+  <p class="big"><span class="newmark blink">NEW</span>ようこそ (^-^)/</p>
+  <p><b>Kanade 着メロ プレーヤー</b> は、昔のケータイの着信メロディ（SMAF・.mmf）を iPhone で鳴らして、30 秒未満の着信音（.m4a）に書き出せるアプリです。無料で使えます☆</p>
+  <p>このページは、昔のケータイ向けの着メロのサイトの空気で作ってみました。</p>
+  <!-- APPSTORE_URL: 審査通過後に差し替え（この行を App Store のバッジとリンクに置き換える） -->
+  <p class="go"><svg class="px" width="10" height="14" aria-hidden="true" focusable="false"><use href="#px-arrow"/></svg> App Store で<span class="blink">公開準備中</span>です <svg class="px" width="10" height="14" aria-hidden="true" focusable="false"><use href="#px-arrow"/></svg></p>
+</div>
+
+<div class="mq bounce" data-mq="alt" data-speed="40" aria-hidden="true">
+  <span class="mq-in">♪あの着メロを、もう一度♪</span>
+</div>
+
+<div class="counter" id="counter">
+  <span>このブラウザで このページを開いたのは</span><br>
+  <span class="digits" id="digits" aria-hidden="true"><span>-</span><span>-</span><span>-</span><span>-</span><span>-</span><span>-</span></span>
+  <span>回目です</span>
+  <span class="vh" id="countText">回数は数えていません</span>
+  <span class="kiriban" id="kiriban" aria-live="polite"></span>
+  <span class="cnote" id="cnote">※ あなたのブラウザの中だけで数えた、あなた自身の回数です。サイト全体の訪問数ではありません。</span>
+  <noscript><span class="cnote">（JavaScript がオフなので数えていません）</span></noscript>
+</div>
+
+<p class="deco" aria-hidden="true">･ﾟ･｡☆｡･ﾟ･｡★｡･ﾟ･｡☆｡･ﾟ･｡★｡･ﾟ･｡☆｡･ﾟ･｡★｡･ﾟ･｡☆｡･ﾟ･｡★｡･ﾟ･｡☆｡･ﾟ･</p>
+
+<h2 class="band"><svg class="px" width="20" height="22" aria-hidden="true" focusable="false"><use href="#px-note"/></svg>メニュー</h2>
+<ol class="menu">
+  <li><a href="#s1" accesskey="1"><span class="key">1</span>新着情報<span class="newmark blink" style="margin-left:auto">NEW</span></a></li>
+  <li><a href="#s2" accesskey="2"><span class="key">2</span>このアプリでできること</a></li>
+  <li><a href="#s3" accesskey="3"><span class="key">3</span>着信音にするには</a></li>
+  <li><a href="#s4" accesskey="4"><span class="key">4</span>曲の手に入れ方</a></li>
+  <li><a href="#s5" accesskey="5"><span class="key">5</span>お値段・動作環境</a></li>
+  <li><a href="#s6" accesskey="6"><span class="key">6</span>きょうの着メロ占い</a></li>
+  <li><a href="#s7" accesskey="7"><span class="key">7</span>リンク</a></li>
+  <li class="hint">※ パソコンなら数字キーで飛べます（0 でページの先頭へ）</li>
+</ol>
+
+<section class="sec" id="s1">
+  <h2 class="band"><svg class="px" width="18" height="18" aria-hidden="true" focusable="false"><use href="#px-star"/></svg><span class="rainbow">★新着情報★</span></h2>
+  <div class="body">
+    <ul class="news">
+      <li><span class="newmark blink">NEW</span>アプリは App Store での公開に向けて準備中です</li>
+    </ul>
+  </div>
+  <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
+</section>
+
+<section class="sec" id="s2">
+  <h2 class="band"><svg class="px" width="20" height="22" aria-hidden="true" focusable="false"><use href="#px-note"/></svg>このアプリでできること</h2>
+  <div class="body">
+    <div class="shotrow">
+      <!-- 画像のバイト数・パケット・円は生成スクリプトが実ファイルの大きさから計算して書き込む。
+           パケット＝バイト数÷128 の端数切り上げ／円＝パケット×0.3（当時のよくある料金の例。特定の会社の料金ではない） -->
+      <figure class="shot">
+        <img src="flow.gif" width="120" height="261" alt="再生画面。鍵盤に向かって、パートごとに色分けされた音が落ちてくる" loading="lazy">
+        <figcaption>この画像は 6,824 バイト＝54 パケット。1 パケット 0.3 円（当時のよくある料金の例）なら約 16.2 円。なので画面の写しは 1 枚だけ (^^;</figcaption>
+      </figure>
+      <ul class="icons">
+        <li><svg class="px" width="20" height="22" aria-hidden="true" focusable="false"><use href="#px-note"/></svg><span>ケータイの着信メロディの形式 <b>SMAF（.mmf）</b> を再生します</span></li>
+        <li><svg class="px" width="11" height="17" aria-hidden="true" focusable="false"><use href="#px-phone"/></svg><span><b>30 秒未満の着信音（.m4a）</b> に書き出せます</span></li>
+        <li><svg class="px" width="18" height="18" aria-hidden="true" focusable="false"><use href="#px-star"/></svg><span>iPhone 専用・iOS 26 以降・表示は日本語です</span></li>
+      </ul>
+    </div>
+    <div class="ringbox" aria-hidden="true">
+      <div class="ring">
+        <span class="n1"><svg class="px" width="20" height="22" aria-hidden="true" focusable="false"><use href="#px-note"/></svg></span>
+        <span class="ph"><svg class="px dark" width="22" height="34" aria-hidden="true" focusable="false"><use href="#px-phone"/></svg><svg class="px lit" width="22" height="34" aria-hidden="true" focusable="false"><use href="#px-phone-lit"/></svg></span>
+        <span class="n2"><svg class="px" width="18" height="18" aria-hidden="true" focusable="false"><use href="#px-note2"/></svg></span>
+      </div>
+      <span class="ringtxt"><span class="blink">♪</span> ちゃらら～ん <span class="blink">♪</span></span>
+    </div>
+  </div>
+  <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
+</section>
+
+<div class="rule"></div>
+
+<section class="sec" id="s3">
+  <h2 class="band"><svg class="px" width="11" height="17" aria-hidden="true" focusable="false"><use href="#px-phone"/></svg>着信音にするには</h2>
+  <div class="body">
+    <ol>
+      <li>アプリで .mmf を開きます</li>
+      <li>30 秒未満の着信音（.m4a）に書き出します</li>
+      <li>書き出しが終わったら共有シートを開き、「着信音として使用」を選びます</li>
+      <li>設定 App の「サウンドと触覚」→「着信音」で選べます</li>
+    </ol>
+    <p>くわしくは <a href="support.html">サポートのページ</a> へ。</p>
+  </div>
+  <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
+</section>
+
+<section class="sec" id="s4">
+  <h2 class="band"><svg class="px" width="22" height="16" aria-hidden="true" focusable="false"><use href="#px-mail"/></svg>曲の手に入れ方</h2>
+  <div class="body">
+    <p>アプリに曲は入っていません（ゴメンネ）。お手元の .mmf を取り込んでお使いください。</p>
+    <ul>
+      <li>ご自分で作った物や、作者が配っている物など、お手元の .mmf を</li>
+      <li>AirDrop で送るか、「ファイル」App に置いて開きます</li>
+      <li>購入した着メロは、著作権の保護のため電話機の外へ取り出せないことがあります</li>
+    </ul>
+    <p><svg class="px" width="10" height="14" aria-hidden="true" focusable="false"><use href="#px-arrow"/></svg><a href="support.html#get-mmf">.mmf を手に入れるには</a></p>
+  </div>
+  <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
+</section>
+
+<p class="deco" aria-hidden="true">━━━━━━☆━━━━━━★━━━━━━☆━━━━━━★━━━━━━☆━━━━━━</p>
+
+<section class="sec" id="s5">
+  <h2 class="band"><svg class="px" width="18" height="16" aria-hidden="true" focusable="false"><use href="#px-heart"/></svg>お値段・動作環境</h2>
+  <div class="body">
+    <table class="tab">
+      <tr><th>お値段</th><td>無料（画面の下にバナー広告が出ます）</td></tr>
+      <tr><th>広告を消す</th><td>アプリ内課金の買い切り</td></tr>
+      <tr><th>読み込み</th><td>SMAF（.mmf）</td></tr>
+      <tr><th>書き出し</th><td>.m4a（30 秒未満の着信音）</td></tr>
+      <tr><th>動作環境</th><td>iPhone・iOS 26 以降</td></tr>
+      <tr><th>表示</th><td>日本語のみ</td></tr>
+      <tr><th>曲</th><td>入っていません</td></tr>
+    </table>
+  </div>
+  <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
+</section>
+
+<section class="sec" id="s6">
+  <h2 class="band"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-sparkle"/></svg><span class="rainbow">きょうの着メロ占い</span></h2>
+  <div class="body fortune">
+    <p>ラッキー音色は <b id="fTone">オルゴール</b><br>ラッキーテンポは <b id="fTempo">♩＝120</b></p>
+    <p style="font-size:11px;color:#666">※ 開くたびに変わります。根拠はありません (^^;</p>
+  </div>
+  <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
+</section>
+
+<div class="rule"></div>
+
+<section class="sec" id="s7">
+  <h2 class="band"><svg class="px" width="10" height="14" aria-hidden="true" focusable="false"><use href="#px-arrow"/></svg>リンク</h2>
+  <div class="body">
+    <ul class="links">
+      <li><a href="support.html"><svg class="px" width="18" height="18" aria-hidden="true" focusable="false"><use href="#px-help"/></svg>サポート</a></li>
+      <li><a href="support.html#get-mmf"><svg class="px" width="20" height="22" aria-hidden="true" focusable="false"><use href="#px-note"/></svg>.mmf を手に入れるには</a></li>
+      <li><a href="privacy-policy.html"><svg class="px" width="18" height="16" aria-hidden="true" focusable="false"><use href="#px-heart"/></svg>プライバシーポリシー</a></li>
+      <li><a href="../index.html"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-sparkle"/></svg>daifuku labs トップ</a></li>
+    </ul>
+  </div>
+  <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
+</section>
+
+<div class="mq byebye" data-mq="left" data-speed="36" aria-hidden="true">
+  <span class="mq-in">♪ またきてね～ (^_^)/~~ ♪ App Store での公開まで、しばらくお待ちください ☆</span>
+</div>
+
+<footer class="foot">
+  <p class="motion"><button type="button" id="motionBtn">■ 動きを止める</button></p>
+  <p>無料でお使いいただけます。画面の下にバナー広告が表示されます。アプリ内課金「広告を消す」（買い切り）で広告が消えます。本アプリに曲は入っていません。お手元の .mmf を取り込んでお使いください。</p>
+  <p>SMAF は登録商標です。形式名は、本アプリが読み込めるファイルの種類を示すためだけに用いています。</p>
+  <p>このページのケータイや記号のドット絵は、すべて自作です。</p>
+  <p>文字の書体は DotGothic16（Copyright 2020 The DotGothic16 Project Authors／Fontworks Inc.）を、このページで使う字だけに切り出して置いています。<a href="dotgothic16-OFL.txt">SIL Open Font License 1.1</a></p>
+  <p class="flinks"><a href="support.html">サポート</a>｜<a href="support.html#get-mmf">.mmf を手に入れるには</a>｜<a href="privacy-policy.html">プライバシーポリシー</a></p>
+  <p class="copy">&copy; 2026 daifuku labs</p>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var MOTION_KEY = "kanade-ringtone-motion";
+  var COUNT_KEY = "kanade-ringtone-visits";
+
+  // ── localStorage（使えなくても壊れない）
+  function sget(k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } }
+  function sset(k, v) { try { window.localStorage.setItem(k, v); return true; } catch (e) { return false; } }
+
+  // ── 動きを止める条件: 端末の設定（reduce）か、ページのボタン
+  var mq = null;
+  try { mq = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null; } catch (e) { mq = null; }
+  var userOff = sget(MOTION_KEY) === "off";
+  function sysReduce() { return !!(mq && mq.matches); }
+  function moving() { return !sysReduce() && !userOff; }
+
+  // ── 流れる文字（marquee のかわり）
+  var marquees = [];
+  Array.prototype.forEach.call(document.querySelectorAll("[data-mq]"), function (box) {
+    var inner = box.querySelector(".mq-in");
+    if (!inner) return;
+    marquees.push({ box: box, inner: inner, mode: box.getAttribute("data-mq"),
+                    speed: parseFloat(box.getAttribute("data-speed")) || 40, x: null, dir: 1 });
+  });
+  var raf = 0, last = 0;
+  function frame(t) {
+    raf = 0;
+    if (!moving()) return;
+    var dt = last ? Math.min((t - last) / 1000, 0.1) : 0;
+    last = t;
+    marquees.forEach(function (m) {
+      var bw = m.box.clientWidth, iw = m.inner.offsetWidth;
+      if (m.mode === "alt") {
+        var min = Math.min(0, bw - iw), max = Math.max(0, bw - iw);
+        if (m.x === null) m.x = min;
+        m.x += m.dir * m.speed * dt;
+        if (m.x >= max) { m.x = max; m.dir = -1; }
+        if (m.x <= min) { m.x = min; m.dir = 1; }
+      } else {
+        if (m.x === null) m.x = bw;
+        m.x -= m.speed * dt;
+        if (m.x < -iw) m.x = bw;
+      }
+      m.inner.style.transform = "translateX(" + m.x.toFixed(1) + "px)";
+    });
+    raf = window.requestAnimationFrame(frame);
+  }
+  function startMarquee() { if (!raf && window.requestAnimationFrame) { last = 0; raf = window.requestAnimationFrame(frame); } }
+  function stopMarquee() {
+    if (raf) { window.cancelAnimationFrame(raf); raf = 0; }
+    marquees.forEach(function (m) { m.x = null; m.dir = 1; m.inner.style.transform = ""; });
+  }
+
+  // ── 虹色の文字（1 文字ずつ色をずらす）
+  var COLORS = ["#e4006f", "#ff6a00", "#b07d00", "#18a53a", "#0a6be0", "#8a2be2"];
+  var rainbows = [];
+  Array.prototype.forEach.call(document.querySelectorAll(".rainbow"), function (el) {
+    var text = el.textContent;
+    var chars = Array.from ? Array.from(text) : text.split("");
+    var vis = document.createElement("span");
+    vis.setAttribute("aria-hidden", "true");
+    var spans = chars.map(function (ch) {
+      var s = document.createElement("span");
+      s.className = "r";
+      s.textContent = ch;
+      vis.appendChild(s);
+      return s;
+    });
+    var sr = document.createElement("span");
+    sr.className = "vh";
+    sr.textContent = text;
+    el.textContent = "";
+    el.appendChild(sr);
+    el.appendChild(vis);
+    rainbows.push(spans);
+  });
+  var shift = 0;
+  function paintRainbow() {
+    rainbows.forEach(function (spans) {
+      spans.forEach(function (s, i) { s.style.color = COLORS[(i + shift) % COLORS.length]; });
+    });
+  }
+
+  // ── 0.5 秒ごとの拍: 点滅（1 秒に 1 回）・虹・着信中のケータイ
+  var tickTimer = 0, phase = false;
+  function tick() {
+    if (!moving()) return;
+    phase = !phase;
+    root.classList.toggle("phase", phase);
+    shift = (shift + 1) % COLORS.length;
+    paintRainbow();
+  }
+
+  // ── 時計（止めているときは時刻だけ更新し、コロンは点滅させない）
+  var clock = document.getElementById("clock");
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function drawClock() {
+    if (!clock) return;
+    var d = new Date();
+    clock.innerHTML = pad(d.getHours()) + '<span class="c">:</span>' + pad(d.getMinutes());
+    root.classList.toggle("colon-off", moving() && d.getSeconds() % 2 === 1);
+  }
+
+  // ── 動きの切り替え
+  var btn = document.getElementById("motionBtn");
+  function applyMotion() {
+    var on = moving();
+    root.classList.toggle("still", !on);
+    if (on) {
+      startMarquee();
+      if (!tickTimer) tickTimer = window.setInterval(tick, 500);
+    } else {
+      stopMarquee();
+      if (tickTimer) { window.clearInterval(tickTimer); tickTimer = 0; }
+      root.classList.remove("phase");
+      root.classList.remove("colon-off");
+    }
+    if (btn) {
+      if (sysReduce()) {
+        btn.disabled = true;
+        btn.textContent = "端末の設定に合わせて止めています";
+      } else {
+        btn.disabled = false;
+        btn.textContent = userOff ? "▶ 動かす" : "■ 動きを止める";
+      }
+      btn.setAttribute("aria-pressed", userOff || sysReduce() ? "true" : "false");
+    }
+  }
+  if (btn) {
+    btn.addEventListener("click", function () {
+      userOff = !userOff;
+      sset(MOTION_KEY, userOff ? "off" : "on");
+      applyMotion();
+    });
+  }
+  if (mq) {
+    if (mq.addEventListener) mq.addEventListener("change", applyMotion);
+    else if (mq.addListener) mq.addListener(applyMotion);
+  }
+
+  // ── あなたの訪問回数（このブラウザの中だけで数える）
+  (function () {
+    var digits = document.getElementById("digits");
+    var note = document.getElementById("cnote");
+    var text = document.getElementById("countText");
+    var kiri = document.getElementById("kiriban");
+    var prev = parseInt(sget(COUNT_KEY), 10);
+    if (!(prev >= 0)) prev = 0;
+    var n = prev + 1;
+    if (!sset(COUNT_KEY, String(n)) || sget(COUNT_KEY) !== String(n)) {
+      if (note) note.textContent = "※ このブラウザでは数えられませんでした（プライベート モードや設定によっては数えません）。";
+      if (text) text.textContent = "回数は数えられませんでした";
+      return;
+    }
+    var s = String(Math.min(n, 999999));
+    while (s.length < 6) s = "0" + s;
+    if (digits) {
+      digits.innerHTML = "";
+      s.split("").forEach(function (c) {
+        var d = document.createElement("span");
+        d.textContent = c;
+        digits.appendChild(d);
+      });
+    }
+    if (text) text.textContent = n + " 回目";
+    var t = String(n);
+    var same = t.length >= 2 && t.split("").every(function (c) { return c === t[0]; });
+    var round = /^[1-9]0+$/.test(t);
+    if (n === 7 || same || round) {
+      kiri.innerHTML = '<span class="newmark blink">キリ番</span><span class="rainbow-k">おめでとう！</span>';
+      kiri.appendChild(document.createElement("br"));
+      kiri.appendChild(document.createTextNode("あなたの " + n + " 回目です。報告はいりません（数えたのはあなたのブラウザだけなので）"));
+      kiri.className = "kiriban on";
+    } else if (n === 1) {
+      kiri.textContent = "はじめまして！ ゆっくりしていってね";
+      kiri.className = "kiriban on";
+    }
+  })();
+
+  // ── 着メロ占い
+  (function () {
+    var tones = ["オルゴール", "ピアノ", "ベル", "木琴", "ハープ", "ストリングス", "トランペット", "フルート", "シンセのリード", "グロッケン"];
+    var tone = document.getElementById("fTone");
+    var tempo = document.getElementById("fTempo");
+    if (tone) tone.textContent = tones[Math.floor(Math.random() * tones.length)];
+    if (tempo) tempo.textContent = "♩＝" + (80 + Math.floor(Math.random() * 9) * 10);
+  })();
+
+  // ── 数字キーで飛ぶ（1〜7 は各節、0 はページの先頭）
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey || e.isComposing) return;
+    var tg = e.target, tag = tg && tg.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (tg && tg.isContentEditable)) return;
+    var k = e.key;
+    var id = k === "0" ? "top" : (/^[1-7]$/.test(k) ? "s" + k : "");
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    if (location.hash === "#" + id) el.scrollIntoView();
+    else location.hash = "#" + id;
+  });
+
+  paintRainbow();
+  drawClock();
+  window.setInterval(drawClock, 1000);
+  applyMotion();
+})();
+</script>
+</body>
+</html>
