@@ -20,7 +20,7 @@
 <body>
 <p><a href="../index.html">daifuku labs</a></p>
 <h1>メロディ消しゴム（Melody Eraser）プライバシーポリシー</h1>
-<p class="updated">最終更新日: 2026-09-11</p>
+<p class="updated">最終更新日: 2026-10-13</p>
 <p class="updated"><a href="#en">English version below</a></p>
 
 <h2>基本方針</h2>
@@ -29,47 +29,61 @@
 
 <h2>音声ファイルについて</h2>
 <ul>
+  <li>曲は、「ミュージック」ライブラリ（iOS の許可ダイアログで許可した場合）、「ファイル」App、ほかのアプリの共有メニューから取り込めます。ミュージックライブラリへのアクセスは、お客様が選んだ曲を本アプリにコピーするためだけに使い、ライブラリの内容を記録・送信することはありません</li>
   <li>取り込んだ音声ファイル、および書き出したファイルは、お使いの端末内にのみ保存されます。
       <strong>外部へ送信されることは一切ありません</strong></li>
   <li>音声の解析・処理はすべて端末内で完結します</li>
 </ul>
 
 <h2>同梱の学習済みモデルについて（2.0 以降）</h2>
-<p>同梱の学習済みモデルは Apple の仕組みで暗号化しています。初めて ML PreFilter（TYPE-I+PF）を使える状態になったとき、OS がモデルの復号鍵を Apple のサーバーから一度だけ取得します。この通信に音声やお客様の情報は含まれません。</p>
+<p>同梱の学習済みモデルは、Apple の Core ML モデル暗号化で暗号化しています。この機能に対応した機種（メモリ 6GB 以上）では、本アプリを起動したときに、OS がモデルの復号鍵を Apple のサーバーから取得します。取得は成功するまで起動のたびに試み、成功した後は再び取得しません（モデルを更新した版では、新しい鍵を一度取得します）。取得した鍵は端末内に保管されます。この通信は Apple の仕組みによるもので、音声やお客様の情報は含まれません。鍵を取得できない間（オフラインなど）は ML PreFilter（TYPE-I+PF）を使えませんが、ほかの機能は使えます。</p>
 
 <h2>広告について（無料版のみ）</h2>
 <p>無料版では、Google が提供する広告サービス「AdMob」を使用してバナー広告と
 リワード広告（動画）を表示します。広告の配信にあたり、Google が端末の情報
-（広告識別子、IPアドレス、端末の種類など）を取得することがあります。</p>
+（広告識別子、IP アドレスとそこから推定したおおよその地域、端末の種類、広告の表示・タップの記録）を取得することがあります。</p>
 <ul>
   <li>端末の広告識別子（IDFA）が広告のパーソナライズに使われるのは、
       iOS のトラッキング許可ダイアログで「許可」を選んだ場合のみです。
-      許可しない場合もパーソナライズされない広告が表示されます</li>
-  <li>お住まいの地域によっては（EU・米国の一部の州など）、広告に関する
+      許可しない場合も、パーソナライズされない広告は表示されます</li>
+  <li>お住まいの地域（英国・スイス・米国の一部の州など）によっては、広告に関する
       同意画面が表示され、選択内容に応じた形で広告が配信されます</li>
-  <li>Google によるデータの取り扱いは、以下をご参照ください
+  <li>これらのデータは Google と、Google が提携する広告配信事業者が、Google のプライバシーポリシーに従って取り扱います。本アプリは、Apple の App Store 審査ガイドラインが求める水準でデータを保護する第三者とだけデータを共有します。詳しくは以下をご参照ください
     <ul>
-      <li><a href="https://policies.google.com/privacy">Google プライバシーポリシー</a></li>
-      <li><a href="https://policies.google.com/technologies/partner-sites">Google の広告におけるデータ利用</a></li>
+      <li><a href="https://policies.google.com/privacy?hl=ja">Google プライバシーポリシー</a></li>
+      <li><a href="https://policies.google.com/technologies/partner-sites?hl=ja">Google のサービスを使用するサイトやアプリから収集した情報の Google による使用</a></li>
+      <li><a href="https://adssettings.google.com/">Google 広告設定</a>（パーソナライズ広告をやめる設定）</li>
     </ul>
   </li>
   <li><strong>Pro（買い切り）をご購入いただくと、広告は一切表示されません</strong></li>
 </ul>
 
-<h2>App内課金について</h2>
+<h2>アプリ内課金について</h2>
 <ul>
   <li>Pro の購入・復元の決済は Apple（App Store）が処理します。
-      <strong>本アプリがクレジットカード番号等の決済情報を受け取ることはありません</strong></li>
+      <strong>本アプリがクレジットカード番号などの決済情報を受け取ることはありません</strong></li>
   <li>購入状態（Pro かどうか）は端末内にのみ記録されます</li>
 </ul>
 
 <h2>設定情報について</h2>
-<p>再生設定（スキップ秒数・出力音量など）や広告で解放したスロット数は、
+<p>再生設定（スキップ秒数・出力音量など）や、広告を見て解放した保存スロットの数は、
 端末内にのみ保存されます。外部への送信はありません。</p>
 
+<h2>利用状況の解析と診断情報について</h2>
+<p>本アプリ自体は、利用状況の解析やクラッシュ情報を集めるための外部のツール（SDK）を組み込んでいません。ただし、バナー広告とリワード広告の表示のために組み込んでいる Google Mobile Ads SDK は、広告の配信と不具合の診断のために、端末の情報（広告識別子、IP アドレスから推定したおおよその地域、端末の種類、広告の表示・タップの記録、クラッシュや動作に関する診断情報）を Google に送ることがあります。App Store の「アプリのプライバシー」欄に記載しているデータの種類は、この SDK によるものです。daifuku labs がこれらのデータを受け取ることはありません。</p>
+
+<h2>データの保持と削除・お客様の選択</h2>
+<ul>
+  <li>本アプリと daifuku labs は、お客様の個人情報を受け取らず、保持もしていません。そのため、daifuku labs に削除を求める対象となるデータはありません</li>
+  <li>取り込んだファイル・書き出したファイル・設定は、お使いの端末内にあります。本アプリを削除するとすべて消えます</li>
+  <li>広告のための広告識別子の利用は、設定 App の「プライバシーとセキュリティ」→「トラッキング」から、いつでも変更できます</li>
+  <li>広告に関する同意画面が表示された地域では、本アプリの情報画面にある「広告のプライバシー設定」から、選択をいつでも変更できます</li>
+  <li>Google が保持するデータの確認・管理・削除は、Google の「広告設定」（<a href="https://adssettings.google.com/">https://adssettings.google.com/</a>）と Google プライバシーポリシーをご覧ください</li>
+  <li>お住まいの地域の法令に基づく権利の行使やご質問は、下記のお問い合わせ先で承ります</li>
+</ul>
+
 <h2>お子様について</h2>
-<p>本アプリは特定の年齢層を対象としたものではなく、お子様を対象とした
-アプリではありません。</p>
+<p>本アプリは、お子様を対象としたアプリではありません。13 歳未満のお子様から個人情報を故意に収集することはありません。</p>
 
 <h2>本ポリシーの変更</h2>
 <p>機能の追加・変更に伴い、本ポリシーを改定することがあります。
@@ -80,58 +94,74 @@
 <a href="mailto:support@daifuku-labs.com">support@daifuku-labs.com</a></p>
 
 <div class="en">
-<h1 id="en">Privacy Policy (English)</h1>
-<p class="updated">Last updated: 2026-09-11</p>
+<h1 id="en">Melody Eraser Privacy Policy (English)</h1>
+<p class="updated">Last updated: 2026-10-13</p>
 
 <h2>Overview</h2>
-<p>Melody Eraser processes audio entirely on your device. The app itself has
-no server, no account system, and does not collect, store, or transmit
-personal information.</p>
+<p>Melody Eraser (“the app”) processes audio entirely on your device. The app
+itself has no server that collects, stores, or transmits personal information,
+and it has no user accounts.</p>
 
 <h2>Your audio files</h2>
 <ul>
+  <li>You can import songs from your Music library (after allowing access in the iOS permission dialog), from the Files app, or from another app’s share sheet. Access to the Music library is used only to copy the song you choose into the app; the app does not record or transmit the contents of your library.</li>
   <li>Imported and exported audio files are stored only on your device and
       are <strong>never transmitted anywhere</strong>.</li>
-  <li>All audio analysis and processing happens on-device.</li>
+  <li>All audio analysis and processing happens on your device.</li>
 </ul>
 
-<h2>The bundled machine-learning model (2.0 and later)</h2>
-<p>The bundled machine-learning model is encrypted using Apple's Core ML model encryption. The first time the app can use ML PreFilter (TYPE-I+PF), the operating system retrieves the model's decryption key from Apple once. This request contains no audio and no personal information.</p>
+<h2>Bundled machine-learning model (version 2.0 and later)</h2>
+<p>The bundled machine-learning model is encrypted with Apple’s Core ML model encryption. On devices that support this feature (6 GB of memory or more), the operating system retrieves the model’s decryption key from Apple’s servers when the app launches. It retries on each launch until it succeeds and does not fetch the key again afterward (a version that updates the model fetches a new key once). The key is stored on your device. This request is made by Apple’s own mechanism and contains no audio and no personal information. While the key is unavailable (for example, offline), ML PreFilter (TYPE-I+PF) cannot be used, but the rest of the app works.</p>
 
-<h2>Advertising (free tier only)</h2>
-<p>The free tier shows banner ads and rewarded (video) ads served by Google
+<h2>Advertising (free version only)</h2>
+<p>The free version shows banner ads and rewarded video ads served by Google
 AdMob. To deliver ads, Google may receive device information such as the
-advertising identifier, IP address, and device type.</p>
+advertising identifier, the IP address and an approximate location estimated
+from it, the device type, and records of ads shown and tapped.</p>
 <ul>
   <li>Your advertising identifier (IDFA) is used for ad personalization only
-      if you tap "Allow" in the iOS tracking permission dialog. If you do not
+      if you tap “Allow” in the iOS tracking permission dialog. If you do not
       allow it, non-personalized ads are shown instead.</li>
-  <li>Depending on your region (such as the EU or certain US states), a
+  <li>Depending on your region (such as the UK, Switzerland, or certain US states), a
       consent screen may be shown, and ads are served according to your
       choices.</li>
-  <li>For how Google handles data, see:
+  <li>This data is handled by Google and by advertising partners Google works with, under the Google Privacy Policy. The app shares data only with third parties that protect it to the standard required by Apple’s App Store Review Guidelines. For details, see:
     <ul>
       <li><a href="https://policies.google.com/privacy">Google Privacy Policy</a></li>
-      <li><a href="https://policies.google.com/technologies/partner-sites">How Google uses data in ads</a></li>
+      <li><a href="https://policies.google.com/technologies/partner-sites">How Google uses information from sites or apps that use our services</a></li>
+      <li><a href="https://adssettings.google.com/">Google Ad Settings</a> (turn off ad personalization)</li>
     </ul>
   </li>
-  <li><strong>If you purchase Pro (one-time), no ads are shown at all.</strong></li>
+  <li><strong>If you purchase Pro (a one-time purchase), no ads are shown at all.</strong></li>
 </ul>
 
 <h2>In-app purchases</h2>
 <ul>
-  <li>Payment for Pro (purchase and restore) is processed by Apple
-      (App Store). <strong>The app never receives your payment details.</strong></li>
+  <li>Purchases and restores of Pro are processed by Apple through the
+      App Store. <strong>The app never receives your payment details.</strong></li>
   <li>Your purchase status is recorded only on your device.</li>
 </ul>
 
 <h2>Settings</h2>
-<p>Playback settings (skip seconds, output volume, etc.) and the number of
-ad-unlocked slots are stored only on your device and are never
-transmitted.</p>
+<p>Playback settings (such as the skip interval and output volume) and the
+number of save slots you have unlocked by watching ads are stored only on your
+device and are never transmitted.</p>
+
+<h2>Analytics and diagnostics</h2>
+<p>The app itself does not include any third-party analytics or crash-reporting SDK. However, the Google Mobile Ads SDK that the app uses to show banner ads and rewarded video ads may send device information to Google to deliver ads and to diagnose problems: the advertising identifier, an approximate location estimated from the IP address, the device type, records of ads shown and tapped, and crash and performance diagnostics. The data types listed under “App Privacy” on the App Store page are those collected by this SDK. daifuku labs does not receive any of this data.</p>
+
+<h2>Data retention, deletion, and your choices</h2>
+<ul>
+  <li>The app and daifuku labs do not receive or retain any of your personal information, so there is no data held by daifuku labs for you to request deletion of.</li>
+  <li>Imported files, exported files, and settings are stored on your device. Deleting the app removes all of them.</li>
+  <li>You can change whether the advertising identifier may be used for ads at any time in iOS Settings &gt; Privacy &amp; Security &gt; Tracking.</li>
+  <li>In regions where an ad consent screen is shown, you can change your choices at any time from “Ad privacy settings” in the app’s Information screen.</li>
+  <li>To review, manage, or delete data held by Google, see Google’s Ad Settings (<a href="https://adssettings.google.com/">https://adssettings.google.com/</a>) and the Google Privacy Policy.</li>
+  <li>To exercise any rights you have under the laws of your region, or for any questions, use the contact below.</li>
+</ul>
 
 <h2>Children</h2>
-<p>This app is not directed at children.</p>
+<p>The app is not directed at children, and it does not knowingly collect personal information from children under 13.</p>
 
 <h2>Changes to this policy</h2>
 <p>This policy may be revised as features are added or changed. Material

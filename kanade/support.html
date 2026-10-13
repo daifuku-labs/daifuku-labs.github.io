@@ -21,32 +21,30 @@
 <h1>Kanade MIDI Player サポート</h1>
 <p class="updated"><a href="#en">English version below</a></p>
 
-<p>Kanade MIDI Player は、88鍵の鍵盤表示と落下ノーツでMIDIの演奏を見ながら聴ける
-Mac用プレーヤーです。お手持ちのSMF・RCP・banbro形式の楽曲データを再生し、
-GS/XGの音色名を画面に表示しながら、内蔵音源または外部のMIDI音源で鳴らせます。</p>
+<p>Kanade MIDI Player は、88 鍵の鍵盤表示と落ちてくるノーツで MIDI の演奏を見ながら聴ける
+Mac 用プレーヤーです。お手持ちの SMF・RCP・banbro・SMAF 形式のファイルを、GS / XG の音色名を画面に表示しつつ、内蔵音源または外部の MIDI
+音源で鳴らせます。</p>
 
 <h2>よくある質問</h2>
 <ul>
   <li><strong>対応している形式は？</strong> —
-      SMF(.mid / .midi)、RMI(.rmi)、KAR(.kar)、RCP形式(.rcp / .r36 / .g36 / .g18)、
-      banbro形式(.bbs / .bdx / .bbp)に対応しています</li>
+      SMF（.mid / .midi）、RMI（.rmi）、KAR（.kar）、RCP 形式（.rcp / .r36 / .g36 / .g18）、
+      banbro 形式（.bbs / .bdx / .bbp）、SMAF（.mmf）です。歌詞と演出を表示する
+      WRD（.wrd / .sry）も読み込みます</li>
   <li><strong>音が鳴らない</strong> —
-      まず出力先の設定をご確認ください。内蔵音源と外部のMIDI出力ポートの
+      まず出力先の設定をご確認ください。内蔵音源と外部の MIDI 出力ポートの
       どちらを選んでいるかで、確認すべき点が変わります。外部音源をお使いの
-      場合は、音源本体の電源が入っているか、Macと正しく接続されているかも
+      場合は、音源本体の電源が入っているか、Mac と正しく接続されているかも
       あわせてご確認ください</li>
-  <li><strong>外部のMIDI音源が無くても使えますか？</strong> —
-      はい。内蔵音源(macOS標準のGS音色)だけで再生できます。外部音源は
-      お持ちの場合に、より忠実な音を鳴らすための選択肢です</li>
-  <li><strong>持ち込みのSoundFontは必須ですか？</strong> —
-      いいえ、不要です。内蔵音源はmacOS標準のGS音色を使うため、追加の
-      SoundFontが無くても鳴ります。お手持ちのSoundFont/DLSファイルに
-      差し替えて使うこともできます</li>
+  <li><strong>外部の MIDI 音源がなくても使えますか？</strong> —
+      はい。内蔵音源（macOS 標準の GS 音色）だけで再生できます。外部音源は、お持ちであれば、より忠実な音で鳴らすための選択肢です</li>
+  <li><strong>SoundFont は自分で用意する必要がありますか？</strong> —
+      いいえ。内蔵音源は macOS 標準の GS 音色を使うため、SoundFont を追加しなくても鳴ります。お手持ちの SoundFont / DLS
+      ファイルに差し替えて使うこともできます</li>
 </ul>
 
 <h2>商標について</h2>
-<p>GSはローランド株式会社の、XGはヤマハ株式会社の登録商標です。その他の製品名は各社の商標または登録商標です。本アプリは
-ローランド株式会社、ヤマハ株式会社のいずれとも無関係です。</p>
+<p>GS はローランド株式会社の、XG はヤマハ株式会社の登録商標です。SMAF はヤマハ株式会社が開発した着信メロディの形式です。その他の製品名は各社の商標または登録商標です。本アプリは、ローランド株式会社・ヤマハ株式会社のいずれとも無関係です。</p>
 
 <h2>お問い合わせ</h2>
 <p>不具合のご報告・ご要望・ご質問は、メールでお寄せください:<br>
@@ -62,36 +60,36 @@ GS/XGの音色名を画面に表示しながら、内蔵音源または外部の
 
 <p>Kanade MIDI Player is a Mac app for playing MIDI song files, with an
 88-key keyboard display and falling notes so you can see the performance
-while you listen. It plays your own SMF, RCP, and banbro format
-song data, shows GS/XG tone names on screen, and can output to the
-built-in synth or external MIDI hardware.</p>
+while you listen. It plays your SMF, RCP, banbro, and SMAF files through the
+built-in synth or external MIDI hardware, showing GS and XG tone names on screen.</p>
 
 <h2>Frequently asked questions</h2>
 <ul>
   <li><strong>Which formats are supported?</strong> —
-      SMF (.mid / .midi), RMI (.rmi), KAR (.kar), RCP format
-      (.rcp / .r36 / .g36 / .g18), and banbro format
-      (.bbs / .bdx / .bbp).</li>
+      SMF (.mid / .midi), RMI (.rmi), KAR (.kar), RCP (.rcp / .r36 / .g36 / .g18),
+      banbro (.bbs / .bdx / .bbp), and SMAF (.mmf). WRD files (.wrd / .sry),
+      which carry lyrics and effects, are read as well.</li>
   <li><strong>No sound?</strong> —
-      Check your output setting first. What to check depends on whether
-      you've selected the built-in synth or an external MIDI port. If
-      you're using an external synth, also make sure it's powered on and
-      correctly connected to your Mac.</li>
+      Check the MIDI output setting first. What to check depends on whether
+      you’ve chosen the built-in synth or an external MIDI port. If
+      you’re using an external synth, also make sure it’s turned on and
+      connected to your Mac.</li>
   <li><strong>Can I use it without external MIDI hardware?</strong> —
-      Yes. The app plays fully using only the built-in synth (macOS's GS
-      tone set). External hardware is an option if you have it, for more
-      faithful sound.</li>
-  <li><strong>Do I need to bring my own SoundFont?</strong> —
-      No. The built-in synth uses macOS's GS tone set, so it plays without
-      any additional SoundFont. If you have your own SoundFont/DLS file,
-      you can use it instead.</li>
+      Yes. It works with just the built-in synth, which uses the GS tone set
+      that comes with macOS. External hardware is optional — a step up in
+      fidelity if you have it.</li>
+  <li><strong>Do I need my own SoundFont?</strong> —
+      No. The built-in synth uses the GS tone set that comes with macOS, so no
+      extra SoundFont is needed. If you have your own SoundFont or DLS file,
+      you can use that instead.</li>
 </ul>
 
 <h2>Trademarks</h2>
 <p>GS is a registered trademark of Roland Corporation, and XG is a
-registered trademark of Yamaha Corporation. Other product names are trademarks or
-registered trademarks of their respective owners. This app is not
-affiliated with Roland Corporation or Yamaha Corporation.</p>
+registered trademark of Yamaha Corporation. SMAF is a ringtone format developed by
+Yamaha Corporation. Other product names are trademarks or registered trademarks of
+their respective owners. daifuku labs is not affiliated with or endorsed by
+Roland Corporation or Yamaha Corporation.</p>
 
 <h2>Contact</h2>
 <p>For bug reports, feature requests, and questions, please email:<br>
@@ -99,7 +97,7 @@ affiliated with Roland Corporation or Yamaha Corporation.</p>
 
 <h2>Related pages</h2>
 <ul>
-  <li><a href="./privacy-policy.html">Privacy Policy</a></li>
+  <li><a href="./privacy-policy.html#en">Privacy Policy</a></li>
 </ul>
 </div>
 
