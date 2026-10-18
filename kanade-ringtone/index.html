@@ -147,6 +147,10 @@
   table.tab { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: .6em; }
   .tab th, .tab td { border: 1px solid #bbb; padding: 5px 7px; text-align: left; vertical-align: top; }
   .tab th { background: #eef3ff; white-space: nowrap; font-weight: 400; color: #1f5fd1; }
+  #labels { scroll-margin-top: 4px; }
+  .labels td:first-child { white-space: nowrap; }
+  .lbl { display: inline-block; border: 1px solid #8a93a6; border-radius: 3px; padding: 1px 4px; font-size: 12px; line-height: 1.3; background: #f4f6fa; color: #333; }
+  .body .note { font-size: 12px; color: #555; }
 
   /* 着信中のケータイ（ドット絵 2 枚を 0.5 秒ごとに入れ替え） */
   .shotrow { display: flex; gap: 10px; align-items: flex-start; }
@@ -254,11 +258,12 @@
 <ol class="menu">
   <li><a href="#s1" accesskey="1"><span class="key">1</span>新着情報<span class="newmark blink" style="margin-left:auto">NEW</span></a></li>
   <li><a href="#s2" accesskey="2"><span class="key">2</span>このアプリでできること</a></li>
-  <li><a href="#s3" accesskey="3"><span class="key">3</span>着信音にするには</a></li>
-  <li><a href="#s4" accesskey="4"><span class="key">4</span>曲の手に入れ方</a></li>
-  <li><a href="#s5" accesskey="5"><span class="key">5</span>お値段・動作環境</a></li>
-  <li><a href="#s6" accesskey="6"><span class="key">6</span>きょうの着メロ占い</a></li>
-  <li><a href="#s7" accesskey="7"><span class="key">7</span>リンク</a></li>
+  <li><a href="#s3" accesskey="3"><span class="key">3</span>ラベルの読み方</a></li>
+  <li><a href="#s4" accesskey="4"><span class="key">4</span>着信音にするには</a></li>
+  <li><a href="#s5" accesskey="5"><span class="key">5</span>曲の手に入れ方</a></li>
+  <li><a href="#s6" accesskey="6"><span class="key">6</span>お値段・動作環境</a></li>
+  <li><a href="#s7" accesskey="7"><span class="key">7</span>きょうの着メロ占い</a></li>
+  <li><a href="#s8" accesskey="8"><span class="key">8</span>リンク</a></li>
   <li class="hint">※ パソコンなら数字キーで飛べます（0 でページの先頭へ）</li>
 </ol>
 
@@ -266,7 +271,8 @@
   <h2 class="band"><svg class="px" width="18" height="18" aria-hidden="true" focusable="false"><use href="#px-star"/></svg><span class="rainbow">★新着情報★</span></h2>
   <div class="body">
     <ul class="news">
-      <li><span class="newmark blink">NEW</span>2026.10.16 アプリを App Store で公開しました！</li>
+      <li><span class="newmark blink">NEW</span>2026.10.18 バージョン 1.1 を公開しました！ パートの<a href="#labels">ラベルの読み方</a>を載せています</li>
+      <li>2026.10.16 アプリを App Store で公開しました！</li>
     </ul>
   </div>
   <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
@@ -300,9 +306,27 @@
   <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
 </section>
 
+<section class="sec" id="s3">
+  <h2 class="band" id="labels"><svg class="px" width="18" height="18" aria-hidden="true" focusable="false"><use href="#px-note2"/></svg>ラベルの読み方</h2>
+  <div class="body">
+    <p>再生画面のパートの一覧で、各パートの番号の下にある小さなラベルは、そのパートをどう鳴らしているかを表しています。バージョン 1.1 から 6 種類に分けました。</p>
+    <table class="tab labels">
+      <tr><th scope="col">ラベル</th><th scope="col">意味</th></tr>
+      <tr><td><span class="lbl">FM-User</span></td><td>曲に入っている音色を、FM で鳴らしています</td></tr>
+      <tr><td><span class="lbl">FM-Pre*</span></td><td>音源チップに内蔵の FM 音色を、別の音で代わりに鳴らしています</td></tr>
+      <tr><td><span class="lbl">PCM-Int</span></td><td>音源チップに内蔵の波形を、別の音で代わりに鳴らしています</td></tr>
+      <tr><td><span class="lbl">PCM-Ext</span></td><td>曲に入っている波形で鳴らしています</td></tr>
+      <tr><td><span class="lbl">Noise</span></td><td>ノイズで鳴らしています</td></tr>
+      <tr><td><span class="lbl">?</span></td><td>曲が指す波形が見つからないため、鍵盤の高さの音で鳴らしています</td></tr>
+    </table>
+    <p class="note">* の付いたラベルは、当時の音とは異なります。</p>
+  </div>
+  <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
+</section>
+
 <div class="rule"></div>
 
-<section class="sec" id="s3">
+<section class="sec" id="s4">
   <h2 class="band"><svg class="px" width="11" height="17" aria-hidden="true" focusable="false"><use href="#px-phone"/></svg>着メロを iPhone の着信音にするには</h2>
   <div class="body">
     <ol>
@@ -316,7 +340,7 @@
   <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
 </section>
 
-<section class="sec" id="s4">
+<section class="sec" id="s5">
   <h2 class="band"><svg class="px" width="22" height="16" aria-hidden="true" focusable="false"><use href="#px-mail"/></svg>曲の手に入れ方</h2>
   <div class="body">
     <p>アプリに曲は入っていません（ゴメンネ）。お手元の .mmf を取り込んでお使いください。</p>
@@ -332,7 +356,7 @@
 
 <p class="deco" aria-hidden="true">━━━━━━☆━━━━━━★━━━━━━☆━━━━━━★━━━━━━☆━━━━━━</p>
 
-<section class="sec" id="s5">
+<section class="sec" id="s6">
   <h2 class="band"><svg class="px" width="18" height="16" aria-hidden="true" focusable="false"><use href="#px-heart"/></svg>お値段・動作環境</h2>
   <div class="body">
     <table class="tab">
@@ -348,7 +372,7 @@
   <p class="totop"><a href="#top"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-up"/></svg>ページの先頭へ<span class="key">0</span></a></p>
 </section>
 
-<section class="sec" id="s6">
+<section class="sec" id="s7">
   <h2 class="band"><svg class="px" width="14" height="14" aria-hidden="true" focusable="false"><use href="#px-sparkle"/></svg><span class="rainbow">きょうの着メロ占い</span></h2>
   <div class="body fortune">
     <p>ラッキー音色は <b id="fTone">オルゴール</b><br>ラッキーテンポは <b id="fTempo">♩＝120</b></p>
@@ -359,7 +383,7 @@
 
 <div class="rule"></div>
 
-<section class="sec" id="s7">
+<section class="sec" id="s8">
   <h2 class="band"><svg class="px" width="10" height="14" aria-hidden="true" focusable="false"><use href="#px-arrow"/></svg>リンク</h2>
   <div class="body">
     <ul class="links">
@@ -578,13 +602,13 @@
     if (tempo) tempo.textContent = "♩＝" + (80 + Math.floor(Math.random() * 9) * 10);
   })();
 
-  // ── 数字キーで飛ぶ（1〜7 は各節、0 はページの先頭）
+  // ── 数字キーで飛ぶ（1〜8 は各節、0 はページの先頭）
   document.addEventListener("keydown", function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey || e.isComposing) return;
     var tg = e.target, tag = tg && tg.tagName;
     if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (tg && tg.isContentEditable)) return;
     var k = e.key;
-    var id = k === "0" ? "top" : (/^[1-7]$/.test(k) ? "s" + k : "");
+    var id = k === "0" ? "top" : (/^[1-8]$/.test(k) ? "s" + k : "");
     if (!id) return;
     var el = document.getElementById(id);
     if (!el) return;
