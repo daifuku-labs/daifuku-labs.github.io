@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ガラケーの着メロ（.mmf）を iPhone の着信音にする方法｜daifuku labs</title>
+<meta name="description" content="昔のガラケーの着メロ .mmf を iPhone で開いて鳴らし、30 秒未満の着信音（.m4a）に書き出して設定するまでの手順です。無料アプリ Kanade 着メロ Player を使い、画面の写しつきで 5 つの段で説明します。">
+<link rel="canonical" href="https://daifuku-labs.com/kanade-ringtone/guide/mmf-to-iphone-ringtone/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="daifuku labs">
+<meta property="og:title" content="ガラケーの着メロ（.mmf）を iPhone の着信音にする方法｜daifuku labs">
+<meta property="og:description" content="昔のガラケーの着メロ .mmf を iPhone で開いて鳴らし、30 秒未満の着信音（.m4a）に書き出して設定するまでの手順です。無料アプリ Kanade 着メロ Player を使い、画面の写しつきで 5 つの段で説明します。">
+<meta property="og:url" content="https://daifuku-labs.com/kanade-ringtone/guide/mmf-to-iphone-ringtone/">
+<meta property="og:image" content="https://daifuku-labs.com/assets/og/kanade-ringtone.jpg">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ガラケーの着メロを、iPhone の着信音にしたい",
+  "description": "昔のガラケーの着メロ .mmf を iPhone で開いて鳴らし、30 秒未満の着信音（.m4a）に書き出して設定するまでの手順です。無料アプリ Kanade 着メロ Player を使い、画面の写しつきで 5 つの段で説明します。",
+  "url": "https://daifuku-labs.com/kanade-ringtone/guide/mmf-to-iphone-ringtone/",
+  "mainEntityOfPage": "https://daifuku-labs.com/kanade-ringtone/guide/mmf-to-iphone-ringtone/",
+  "image": "https://daifuku-labs.com/assets/og/kanade-ringtone.jpg",
+  "inLanguage": "ja",
+  "datePublished": "2026-10-23",
+  "dateModified": "2026-10-23",
+  "about": {
+    "@type": "MobileApplication",
+    "name": "Kanade 着メロ Player",
+    "url": "https://daifuku-labs.com/kanade-ringtone/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://daifuku-labs.com/#organization",
+    "name": "daifuku labs",
+    "url": "https://daifuku-labs.com/"
+  },
+  "author": {
+    "@type": "Organization",
+    "@id": "https://daifuku-labs.com/#organization",
+    "name": "daifuku labs",
+    "url": "https://daifuku-labs.com/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "daifuku labs",
+      "item": "https://daifuku-labs.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Kanade 着メロ Player",
+      "item": "https://daifuku-labs.com/kanade-ringtone/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "ガラケーの着メロを iPhone の着信音にする",
+      "item": "https://daifuku-labs.com/kanade-ringtone/guide/mmf-to-iphone-ringtone/"
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/assets/site.css">
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "9dd29a2d1fa041be908ff33ad7f03ffd"}'></script>
+<style>
+  /* 記事ページだけの見た目（site.css の tone-y の色をそのまま使う） */
+  .guide { max-width: 680px; margin: 0 auto; padding: 22px 20px 0; }
+  .guide a { color: var(--acc); text-decoration: underline; text-underline-offset: 3px; }
+  .crumbs { font-size: .8em; color: var(--sub); margin: 0; }
+  .crumbs a { color: var(--sub); }
+  .guide h1 { font-size: 1.7em; margin-top: .9em; }
+  .guide h2 { font-size: 1.25em; margin-top: 2.2em; padding-bottom: .3em; border-bottom: 1px solid var(--line); }
+  .guide h3 { font-size: 1.02em; margin: 0; line-height: 1.5; }
+  .lead { margin: 1.2em 0 0; padding: 14px 18px 14px 2.2em; background: var(--card);
+          border: 1px solid var(--line); border-radius: 12px; }
+  .lead li + li { margin-top: .3em; }
+  .need { width: 100%; border-collapse: collapse; margin-top: 1em; font-size: .95em; }
+  .need th, .need td { text-align: left; vertical-align: top; padding: 9px 10px;
+                       border-top: 1px solid var(--line); }
+  .need th { white-space: nowrap; width: 5.5em; color: var(--sub); font-weight: 600; }
+  .steps { list-style: none; padding: 0; margin: 1.2em 0 0; counter-reset: s; }
+  .steps > li { counter-increment: s; position: relative; padding: 0 0 1.8em 2.6em; }
+  .steps > li::before { content: counter(s); position: absolute; left: 0; top: 0;
+                        width: 1.8em; height: 1.8em; border-radius: 50%; background: var(--acc);
+                        color: #fff; font-weight: 700; text-align: center; line-height: 1.8em; font-size: .9em; }
+  .steps p { margin-top: .35em; }
+  .steps figure { margin: .9em 0 0; max-width: 220px; }
+  .steps figure img { border-radius: 18px; box-shadow: var(--shadow); }
+  .qa dt { font-weight: 700; margin-top: 1.2em; }
+  .qa dd { margin: .3em 0 0; }
+  .guide .cta { text-align: center; margin-top: 2.4em; }
+  .rel { padding-left: 1.2em; }
+  @media (min-width: 700px) { .guide { padding-top: 30px; } .guide h1 { font-size: 2em; } }
+</style>
+</head>
+<body class="tone-y p-guide">
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="nav"><a class="brand" href="/">daifuku labs</a></header>
+<main id="main" class="guide">
+<p class="crumbs"><a href="/">daifuku labs</a> › <a href="/kanade-ringtone/">Kanade 着メロ Player</a> › 使い方</p>
+<article>
+<h1>ガラケーの着メロを、iPhone の着信音にしたい</h1>
+<p>昔の携帯電話（ガラケー）の着メロは、.mmf（SMAF）というファイルです。無料の iPhone アプリ「Kanade 着メロ Player」を使えば、こうなります。</p>
+<ul class="lead">
+  <li>.mmf を iPhone で開いて、鳴らせます</li>
+  <li>好きな所から 30 秒未満を切り出し、着信音（.m4a）に書き出せます</li>
+  <li>共有シートの「着信音として使用」で登録し、設定 App で選べます</li>
+</ul>
+
+<h2>用意するもの</h2>
+<table class="need">
+  <tr><th>iPhone</th><td>iOS 26 以降</td></tr>
+  <tr><th>アプリ</th><td>Kanade 着メロ Player（無料・画面の下にバナー広告あり）</td></tr>
+  <tr><th>着メロ</th><td>お手持ちの .mmf ファイル（アプリに曲は入っていません）</td></tr>
+</table>
+
+<h2>手順</h2>
+<ol class="steps">
+  <li>
+    <h3>.mmf をアプリで開く</h3>
+    <p>「ファイル」App で .mmf を開くか、共有シートからこのアプリを選びます。AirDrop で送っても取り込めます。アプリの右上の「+」からも選べます。</p>
+    <figure><img src="/assets/img/kanade-ringtone/guide/library.jpg" srcset="/assets/img/kanade-ringtone/guide/library.jpg 1x, /assets/img/kanade-ringtone/guide/library@2x.jpg 2x" width="300" height="652" alt="曲の一覧の画面。取り込んだ .mmf が並び、右上に「+」のボタンがある" loading="lazy" decoding="async"></figure>
+  </li>
+  <li>
+    <h3>曲を選んで「着信音にする」を押す</h3>
+    <p>一覧の曲をタップすると、再生が始まります。右上の「着信音にする」を押します。</p>
+    <figure><img src="/assets/img/kanade-ringtone/guide/player.jpg" srcset="/assets/img/kanade-ringtone/guide/player.jpg 1x, /assets/img/kanade-ringtone/guide/player@2x.jpg 2x" width="300" height="652" alt="再生画面。鍵盤に向かってノーツが落ちてきて、右上に「着信音にする」のボタンがある" loading="lazy" decoding="async"></figure>
+  </li>
+  <li>
+    <h3>使う所を選んで「共有シートへ」を押す</h3>
+    <p>枠を左右に動かして、始まりを選びます。短い曲は全体が入ります。「試聴」で確かめてから「共有シートへ」を押します。</p>
+    <figure><img src="/assets/img/kanade-ringtone/guide/export.jpg" srcset="/assets/img/kanade-ringtone/guide/export.jpg 1x, /assets/img/kanade-ringtone/guide/export@2x.jpg 2x" width="300" height="652" alt="「着信音にする」の画面。範囲の枠、終わりをフェードアウトするスイッチ、「試聴」と「共有シートへ」のボタンがある" loading="lazy" decoding="async"></figure>
+  </li>
+  <li>
+    <h3>共有シートで「着信音として使用」を選ぶ</h3>
+    <p>これで iPhone の着信音に登録されます。</p>
+  </li>
+  <li>
+    <h3>設定 App で着信音を選ぶ</h3>
+    <p>設定 App の「サウンドと触覚」→「着信音」で、登録した着信音を選びます。</p>
+  </li>
+</ol>
+
+<h2>うまくいかないとき</h2>
+<dl class="qa">
+  <dt>30 秒より長い着信音にできますか？</dt>
+  <dd>いいえ。iOS の着信音は 30 秒未満に限られます。長い曲は、選んだ始まりから 30 秒未満を切り出します。</dd>
+  <dt>.mid などのファイルは開けますか？</dt>
+  <dd>開けません。開けるのは SMAF（.mmf）だけです。</dd>
+  <dt>昔の携帯電話から着メロを取り出せません</dt>
+  <dd>購入した着メロは、著作権の保護のため携帯電話の外へ取り出せないことがあります。.mmf ファイルとして取り出せたものは、上の手順で使えます。</dd>
+  <dt>お金はかかりますか？</dt>
+  <dd>無料で使えます。画面の下にバナー広告が出ます。アプリ内課金「広告を消す」（買い切り）で広告が消えます。</dd>
+</dl>
+
+<h2>.mmf の手に入れ方</h2>
+<p>取り込めるファイルと取り込み方は、サポートの「<a href="/kanade-ringtone/support.html#get-mmf">.mmf を手に入れるには</a>」にまとめています。</p>
+
+<div class="cta"><span class="badge-wrap"><a class="badge" href="https://apps.apple.com/app/apple-store/id6821332533?pt=129254985&amp;ct=site&amp;mt=8"><img src="/assets/img/appstore-badge.svg" alt="App Store で入手" width="150" height="50"></a><span class="badge-note">iPhone 専用・iOS 26 以降・表示は日本語のみ</span></span></div>
+
+<h2>関連ページ</h2>
+<ul class="rel">
+  <li><a href="/kanade-ringtone/">Kanade 着メロ Player（製品ページ）</a></li>
+  <li><a href="/kanade-ringtone/support.html">サポート・お問い合わせ</a></li>
+</ul>
+</article>
+</main>
+<footer class="foot"><p class="tm">SMAF をはじめ、本文中の形式名は各社の商標または登録商標で、本アプリが読み込めるファイルの種類を示すためだけに用いています。</p><nav><a href="/kanade-ringtone/support.html">サポート</a> <a href="/kanade-ringtone/privacy-policy.html">プライバシーポリシー</a></nav><p class="copy">&copy; 2026 daifuku labs</p></footer>
+</body>
+</html>
